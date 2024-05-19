@@ -1,10 +1,10 @@
 @media (max-width: 1200px) {}
 
 @media (max-width: 991px) {
-    body{
+    body {
         overflow-x: hidden;
     }
-    
+
     .nav {
 
         >.menu {
@@ -47,34 +47,92 @@
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
 @media (max-width: 791px) {
     .nav {
         >.menu {
             width: 60vw;
         }
     }
+
+
+
+    .footer {
+        >.top {
+            flex-direction: column;
+            >.col1{
+                width: 80vw;
+                >h3{
+
+                }
+                >.socials{
+                    
+                    margin-left: -2rem;
+                }
+            }
+            >div{
+                margin-top: 2rem;
+                width: 80vw;
+                >h4{
+    
+                }
+                >.menu{
+                    li{
+                        padding: .9rem 0;
+                    }
+                }
+            }
+           
+        }
+    }
+
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media (max-width: 530px) {
-    .mainSearchBox{
-        >.mainSearchTitle{
+    .mainSearchBox {
+        >.mainSearchTitle {
             font-size: 3rem;
             text-align: center;
             font-weight: 500;
-            >.desc{
+
+            >.desc {
                 font-size: .7rem;
             }
         }
 
         >.input {
-            >input{
+            >input {
                 font-size: .8rem;
                 padding: .4rem 1rem;
 
 
             }
+
             >.search {
-                span{
+                span {
                     font-size: .8rem;
                 }
             }
@@ -84,8 +142,8 @@
 }
 
 @media (max-width: 440px) {
-    .bgImg{
-        img{
+    .bgImg {
+        img {
             aspect-ratio: 9/16;
         }
     }

@@ -17,7 +17,6 @@ import ListingCard from "@/components/ListingCard/ListingCard";
 export default function Home() {
   return (
     <>
-     
         <Header />
         <div className="bgImg">
           <Image src={BgImg} alt="BgImg" />
@@ -25,13 +24,13 @@ export default function Home() {
         <MainSearchBox />
         <div className="listings">
           <ListingCard />
+          <ListingCard />
+          <ListingCard />
+          <ListingCard />
+          <ListingCard />
+          <ListingCard />
         </div>
-
-
-
         <Footer />
-
-
     </>
   );
 }

@@ -1,13 +1,65 @@
-.ListingCard{
-    width: 30rem;
-    height: max-content;
-    border: 2px solid red;
+@import "@/styles/Variables.scss";
 
-    
+.ListingCard{
+    width: 20rem;
+    height: 27rem;
+    // border: 2px solid red;
+
+    margin-top: 1rem;
+    padding: 1rem;
+    box-shadow: 0 0 17px 0 rgba(0, 0, 0, 0.1);
+    &:hover{
+        >.img{
+            img{
+                transform: scale(1.05)
+            }
+        }
+    }
     >.img{
         img{
-            max-width: inherit;
+            max-width: 20rem;
+            height: auto;
+            transition: all ease-in-out .5s;
 
+            // &:hover{
+            //     // transition: all ease-in-out .5s;
+            //     transform: scale(1.1)
+            // }
+        }
+    }
+    >.titleRev{
+        @include displayFlex(space-evenly,start,column);
+        width: 100%;
+        >.title{
+            text-align: start;
+            font-size: 1.5rem;
+            z-index: 1
+        }
+        >.rev{
+            margin-top: .9rem;
+            @include displayFlex(space-between,center,row);
+            width: 100%;
+
+        }
+    }
+    >.addressDetails{
+        >.address{
+            @include displayFlex(space-between,center);
+            padding: .5rem;
+
+        }
+        >.website{
+            @include displayFlex(space-between,center);
+            padding: .5rem;
+        }
+    }
+    >.bookBtn{
+        margin-top: 2rem;
+        display: grid;
+        *{
+            padding: .5rem;
+            background: #000;
+            color: #fff;
         }
     }
 }

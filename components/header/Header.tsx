@@ -17,21 +17,23 @@ const Header = () => {
     const handleScroll = () => {
       const currentScrollPos = window.pageYOffset;
       if (currentScrollPos > lastScrollTop) {
-        setIsVisible(false); // Scrolling down
+        setIsVisible(false); 
       } else {
-        setIsVisible(true); // Scrolling up
+        setIsVisible(true);
       }
-      lastScrollTop = currentScrollPos <= 0 ? 0 : currentScrollPos; // For mobile or negative scrolling
+      lastScrollTop = currentScrollPos <= 0 ? 0 : currentScrollPos; 
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollTop]);
 
+
+
   return (
     <nav className={`nav ${isVisible ? 'visible' : 'hidden'}`}>
       <div className="logo hover-underline-animation">
-        <Link href="/">Housing.COM</Link>
+        <Link href="/">HOSTELO</Link>
       </div>
       <ul className={`menu ${isNotOpen ? 'close' : ''}`}>
         <li className='hover-underline-animation'>
@@ -44,7 +46,7 @@ const Header = () => {
           <Link href="/contact">Contact</Link>
         </li>
         <li className="user">
-          <span>Login <FaUser /></span>
+          <Link href={"/login"}>Login <FaUser /></Link>
         </li>
       </ul>
       <div className="hamBurger" onClick={toggleClass}>

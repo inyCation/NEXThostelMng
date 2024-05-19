@@ -65,7 +65,7 @@
                 cursor: pointer;
             }
 
-            >span {
+            >* {
                 @include displayFlex(center, center);
                 gap: 1rem;
                 background: #000;

@@ -2,7 +2,7 @@ import React from 'react'
 import "./ListingCard.scss"
 import img from "@/assets/ListingCard/place-4.jpg"
 
-import {CiLocationOn, CiPhone} from "react-icons/ci"
+import {CiLocationOn, CiPhone,} from "react-icons/ci"
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -15,6 +15,7 @@ const ListingCard = () => {
       <div className="img">
         <Image src={img} alt='listimg' />
       </div>
+
       <div className="titleRev">
         <div className="title">
           Four Season Resort
@@ -23,7 +24,7 @@ const ListingCard = () => {
           <span className="stars">
             *****
           </span>
-          <div className="noOfRev">3 Reviews</div>
+          <span className="noOfRev">3 Reviews</span>
           
         </div>
       </div>
@@ -32,8 +33,9 @@ const ListingCard = () => {
         <div className="address"> <CiLocationOn /> Khale Street , USA</div>
         <div className="website"> <CiPhone /> WWW.FourSeason.com</div>
       </div>
+      
       <div className="bookBtn">
-        <Link href={"/query/75645"} className="QueryNow">Query Now</Link>
+        <Link href={"/query/75645"} className="QueryNow">Book  Now </Link>
       </div>
 
     </div>

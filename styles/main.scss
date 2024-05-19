@@ -14,3 +14,8 @@
     }
 
 }
+
+.listings{
+    @include displayFlex(space-evenly,start,row,wrap);
+
+}
