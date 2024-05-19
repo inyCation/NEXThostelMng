@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300..700&display=swap');
+
+$primaryColor: #e0e0e0;
+$textDark: #1c1c1c;
+
+
+$primaryFont: "Signika Negative", sans-serif;
+
+@mixin displayFlex($justify, $align, $dir: row, $wrap: nowrap){
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+    
+    flex-direction: $dir;    
+    flex-wrap: $wrap;
+}
+
+
+@mixin hoverUnderLineAnimation(){
+    .hover-underline-animation {
+        display: inline-block;
+        position: relative;
+;
+    }
+
+    .hover-underline-animation::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        transform: scaleX(0);
+        height: 2px;
+        bottom: -2px;
+        left: 0;
+        background-color: #171717;
+        transform-origin: bottom right;
+        transition: transform 0.25s ease-out;
+    }
+
+    .hover-underline-animation:hover::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+    }
+}

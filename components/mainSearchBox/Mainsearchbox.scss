@@ -1,0 +1,64 @@
+@import "@/styles/Variables.scss";
+
+.mainSearchBox {
+    @include displayFlex(space-around, center,column);
+    
+    position: absolute;
+
+    z-index: 10;
+    top: 0vh;
+    left: 0vw;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: #00000046;
+
+    >.mainSearchTitle{
+        font-size: 4rem;
+        text-align: center;
+        font-weight: 500;
+        >.desc{
+            font-size: .9rem;
+            
+        }
+    }
+   
+
+    >.input {
+        position: relative;
+        top: -25vh;
+        >input{
+            width: 80vw;
+            height: 3rem;
+            font-size: 1.2rem;
+            padding: .5rem 1.5rem;
+            border-radius: 3rem;
+            outline: none;
+            border: none;
+        }
+        >.search {
+            right: 1rem;
+            top: .8rem;
+            position: absolute;
+    
+            &:hover {
+                cursor: pointer;
+            }
+            >span{
+                @include displayFlex(center,center);
+                gap: .5rem;
+                background: #000;
+                color: #e1dfdf;
+                padding: .6rem .8rem;
+                border-radius: 1.5rem;
+                *{
+                    color: #e1dfdf;
+                }
+                
+            }
+    
+        }
+    }
+
+    
+}

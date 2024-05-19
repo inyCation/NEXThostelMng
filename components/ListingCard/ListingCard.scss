@@ -1,0 +1,13 @@
+.ListingCard{
+    width: 30rem;
+    height: max-content;
+    border: 2px solid red;
+
+    
+    >.img{
+        img{
+            max-width: inherit;
+
+        }
+    }
+}

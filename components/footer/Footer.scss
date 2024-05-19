@@ -1,0 +1,14 @@
+@import "@/styles/Variables.scss";
+
+.navd{
+
+    font-size: 1rem;
+    height: 100vh;
+    >p{
+        color: brown;
+
+        &:hover{
+            color: blue;
+        }
+    }
+}
