@@ -34,10 +34,10 @@
 
     .menu {
         transition: all ease-in-out .5s;
+        overflow: hidden;
         &.close {
             transition: all ease-in-out .5s;
-
-          right: -100vw;
+            top: -300vw;
         }
     }
     

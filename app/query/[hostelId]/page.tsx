@@ -1,25 +1,17 @@
 import React from 'react'
-import Header from '@/components/header/Header'
-import Footer from '@/components/footer/Footer'
 
 
 
 
 
-import "@/styles/main.scss"
 
-
-import "@/styles/mediaQuery.scss"
-
-
-
-const page = () => {
+const page = ({params}:{params:number}) => {
     return (
         <>
-            <Header />
+           
+                hostel id :- {params.hostelId}
 
-
-            <Footer />
+           
         </>
     )
 }

@@ -8,6 +8,8 @@
     margin-top: 1rem;
     padding: 1rem;
     box-shadow: 0 0 17px 0 rgba(0, 0, 0, 0.1);
+    font-family: $primaryFont;
+
     &:hover{
         >.img{
             img{
@@ -21,10 +23,6 @@
             height: auto;
             transition: all ease-in-out .5s;
 
-            // &:hover{
-            //     // transition: all ease-in-out .5s;
-            //     transform: scale(1.1)
-            // }
         }
     }
     >.titleRev{
@@ -38,7 +36,7 @@
         >.rev{
             margin-top: .9rem;
             @include displayFlex(space-between,center,row);
-            width: 100%;
+            width: 97%;
 
         }
     }

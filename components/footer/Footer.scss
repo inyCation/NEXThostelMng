@@ -5,6 +5,8 @@
     @include displayFlex(space-evenly, center,column);
     width: 100vw;
     margin-top: 3rem;
+    font-family: $primaryFont;
+
     
 
     >.top{

@@ -2,20 +2,43 @@
 
 
 
-.bgImg{
+.bgImg {
     position: sticky;
     margin-top: -3.8rem;
     box-sizing: border-box;
+    height: 100vh;
+    width: 100vw;
 
-    >img{
-        width: auto;
-        height: 100vh;
-        opacity: 0.8;
+
+    // background-color: #ececec;
+    // opacity: 0.4;
+    // background-image: radial-gradient(#2d36ec 0.8500000000000001px, transparent 0.8500000000000001px), radial-gradient(#2d36ec 0.8500000000000001px, #ececec 0.8500000000000001px);
+    // background-size: 34px 34px;
+    // background-position: 0 0, 17px 17px;
+
+
+    background-position: center;
+    background-size: cover;
+    height: 550px;
+
+    background-image: url("../assets/home/herobg.jpg");
+
+    >img {
+        // width: 100vw;
+        // height: 100vh;
+        // box-sizing: border-box;
+        // opacity: 0.8;
+
+        max-width: 100%;
+        height: auto;
+        display: inline-block;
+
+
     }
 
 }
 
-.listings{
-    @include displayFlex(space-evenly,start,row,wrap);
+.listings {
+    @include displayFlex(space-evenly, start, row, wrap);
 
 }
