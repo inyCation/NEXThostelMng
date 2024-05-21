@@ -5,7 +5,7 @@ import React from 'react'
 
 
 
-const page = ({params}:{params:number}) => {
+const page = ({params}:{params:any}) => {
     return (
         <>
            
