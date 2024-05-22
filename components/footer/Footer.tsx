@@ -8,7 +8,7 @@ import imgBg from "@/assets/home/footerBg.svg"
 
 import "./Footer.scss"
 import Image from 'next/image'
-const Footer = () => {
+const Footer : React.FC  = () => {
   return (
 
     <div className='footer'>

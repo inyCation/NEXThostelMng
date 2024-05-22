@@ -9,7 +9,7 @@ import Link from 'next/link'
 
 
 
-const ListingCard = () => {
+const ListingCard: React.FC  = () => {
   return (
     <div className='ListingCard' > 
       <div className="img">

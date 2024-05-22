@@ -9,7 +9,7 @@ import "@/styles/main.scss"
 import "@/styles/mediaQuery.scss"
 
 
-const page = () => {
+const page : React.FC  = () => {
   return (
     <>
   

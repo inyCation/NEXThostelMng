@@ -4,7 +4,7 @@ import "./Header.scss";
 import Link from 'next/link';
 import { FaUser } from "react-icons/fa";
 
-const Header = () => {
+const Header : React.FC = () => {
   const [isNotOpen, setIsNotOpen] = useState(true);
   const [isVisible, setIsVisible] = useState(true);
   let lastScrollTop = 0;

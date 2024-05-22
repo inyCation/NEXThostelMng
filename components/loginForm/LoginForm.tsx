@@ -1,104 +1,142 @@
-"use client"
+import React, { useState, ChangeEvent, FormEvent } from 'react';
+import './LoginForm.scss';
+import { useMutation } from 'react-query';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+interface LoginData {
+  email: string;
+  password: string;
+  rememberMe: boolean;
+}
 
-import React, { useState } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
-import axios from 'axios';
-import "./LoginForm.scss";
+interface RegisterData {
+  userName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  terms: boolean;
+}
 
-const LoginForm = () => {
-  const [loginRegisterToggler, setLoginRegisterToggler] = useState(true);
+const LoginForm: React.FC = () => {
+  const [loginRegisterToggler, setLoginRegisterToggler] = useState<boolean>(true);
 
-  const queryClient = useQueryClient();
+  const [loginData, setLoginData] = useState<LoginData>({
+    email: '',
+    password: '',
+    rememberMe: false,
+  });
 
-  const loginMutation = useMutation(
-    async (data) => {
-      const response = await axios.post('/api/login', data);
-      return response.data;
-    },
-    {
-      onSuccess: (data) => {
-        // Handle success, maybe store tokens or user data
-        console.log("Login successful:", data);
-        queryClient.invalidateQueries('user'); // Example to refetch user data
+  const [registerData, setRegisterData] = useState<RegisterData>({
+    userName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    terms: false,
+  });
+
+  const loginMutation = useMutation((loginData: LoginData) =>
+    fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-      onError: (error) => {
-        // Handle error
-        console.error("Login error:", error);
-      }
-    }
+      body: JSON.stringify(loginData),
+    }).then((res) => {
+      if (!res.ok) throw new Error('Login failed');
+      return res.json();
+    })
   );
 
-  const registerMutation = useMutation(
-    async (data) => {
-      const response = await axios.post('/api/register', data);
-      return response.data;
-    },
-    {
-      onSuccess: (data) => {
-        // Handle success, maybe store tokens or user data
-        console.log("Registration successful:", data);
-        queryClient.invalidateQueries('user'); // Example to refetch user data
+  const registerMutation = useMutation((registerData: RegisterData) =>
+    fetch('/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-      onError: (error) => {
-        // Handle error
-        console.error("Registration error:", error);
-      }
-    }
+      body: JSON.stringify(registerData),
+    }).then((res) => {
+      if (!res.ok) throw new Error('Registration failed');
+      return res.json();
+    })
   );
 
-  const handleLoginSubmit = (e) => {
-    e.preventDefault();
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-    loginMutation.mutate({ email, password });
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); // Prevent default form submission behavior
+
+    if (loginRegisterToggler) {
+      try {
+        await loginMutation.mutateAsync(loginData);
+        toast.success('Login successful');
+      } catch (error : any) {
+        toast.error(error.message);
+      }
+    } else {
+      try {
+        await registerMutation.mutateAsync(registerData);
+        toast.success('Registration successful');
+      } catch (error : any) {
+        toast.error(error.message);
+      }
+    }
   };
 
-  const handleRegisterSubmit = (e) => {
-    e.preventDefault();
-    const userName = e.target.userName.value;
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-    const confirmPassword = e.target.confirmPassword.value;
-    if (password !== confirmPassword) {
-      console.error("Passwords do not match");
-      return;
-    }
-    registerMutation.mutate({ userName, email, password });
+  const handleLoginInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value, checked } = event.target;
+
+    setLoginData((prevState) => ({
+      ...prevState,
+      [name]: name === 'rememberMe' ? checked : value,
+    }));
+  };
+
+  const handleRegisterInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value, checked } = event.target;
+    setRegisterData((prevState) => ({
+      ...prevState,
+      [name]: name === 'terms' ? checked : value,
+    }));
   };
 
   return (
-    <div className="loginForm">
-      <div className="loginOrRegister">
-        <div className={`login ${loginRegisterToggler ? 'activeTitle' : ''}`} onClick={() => setLoginRegisterToggler(true)}>Login</div>
-        <div className={`register ${loginRegisterToggler ? '' : 'activeTitle'}`} onClick={() => setLoginRegisterToggler(false)}>Register</div>
-      </div>
+    <>
+      <ToastContainer />
+      <div className="loginForm">
+        <div className="loginOrRegister">
+          <div className={`login ${loginRegisterToggler ? 'activeTitle' : ''}`} onClick={() => setLoginRegisterToggler(true)}>Login</div>
+          <div className={`register ${loginRegisterToggler ? '' : 'activeTitle'}`} onClick={() => setLoginRegisterToggler(false)}>Register</div>
+        </div>
 
-      {
-        loginRegisterToggler ? (
-          <form onSubmit={handleLoginSubmit} className={`${loginRegisterToggler ? 'active' : ''}`}>
-            <input type="text" name="email" id="email" placeholder='Email' />
-            <input type="password" name="password" id="password" placeholder='Password' />
+        {loginRegisterToggler ? (
+          <form action="" className={`${loginRegisterToggler ? 'active' : ''}`} onSubmit={handleSubmit}>
+            <input type="text" name="email" id="email" placeholder="Email" value={loginData.email} onChange={handleLoginInputChange} />
+            <input type="password" name="password" id="password" placeholder="Password" value={loginData.password} onChange={handleLoginInputChange} />
             <div className="rememberMeForgetPass">
-              <span> <input type="checkbox" name="rememberme" id="rememberme" /> Remember Me </span>
+              <span>
+                <input type="checkbox" name="rememberMe" id="rememberMe" checked={loginData.rememberMe} onChange={handleLoginInputChange} /> Remember Me
+              </span>
               <span className="forgetPassword">Forget Password</span>
             </div>
-            <button type="submit" className='submit'>Login</button>
+
+            <button type="submit" className="submit">Login</button>
           </form>
-        ) :
-        (
-          <form onSubmit={handleRegisterSubmit} className={`${loginRegisterToggler ? "" : 'active'}`}>
-            <input type="text" name="userName" id="userName" placeholder='Username' />
-            <input type="text" name="email" id="email" placeholder='Email' />
-            <input type="password" name="password" id="password" placeholder='Password' />
-            <input type="text" name="confirmPassword" id="confirmPassword" placeholder='Confirm Password' />
+        ) : (
+          <form action="" className={`${loginRegisterToggler ? '' : 'active'}`} onSubmit={handleSubmit}>
+            <input type="text" name="userName" id="userName" placeholder="Username" value={registerData.userName} onChange={handleRegisterInputChange} />
+            <input type="text" name="email" id="email" placeholder="Email" value={registerData.email} onChange={handleRegisterInputChange} />
+            <input type="password" name="password" id="password" placeholder="Password" value={registerData.password} onChange={handleRegisterInputChange} />
+            <input type="text" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" value={registerData.confirmPassword} onChange={handleRegisterInputChange} />
+
             <div className="termsAndCondition">
-              <span> <input type="checkbox" name="terms" id="terms" /> I've read and accept terms & conditions </span>
+              <span>
+                <input type="checkbox" name="terms" id="terms" checked={registerData.terms} onChange={handleRegisterInputChange} /> I've read and accept terms & conditions
+              </span>
             </div>
-            <button type="submit" className='submit'>Sign Up</button>
+
+            <button type="submit" className="submit">Sign Up</button>
           </form>
-        )
-      }
-    </div>
+        )}
+      </div>
+    </>
   );
 };
 

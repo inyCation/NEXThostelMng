@@ -5,7 +5,7 @@ import React from 'react'
 
 
 
-const page = ({params}:{params:any}) => {
+const page  = ({params}:{params:any}) => {
     return (
         <div className='hostelDetailsPage'>
 

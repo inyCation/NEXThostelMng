@@ -1,7 +1,7 @@
 import React from 'react'
 import "./ScrollToTop.scss"
 
-const ScrollToTop = () => {
+const ScrollToTop : React.FC  = () => {
   return (
     <div>ScrollToTop</div>
   )

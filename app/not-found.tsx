@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 
-const notFound = () => {
+const notFound  : React.FC  = () => {
   return (
     <div className=''>
         <div className=''>The Page You Requested Is Not Found</div>

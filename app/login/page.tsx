@@ -9,12 +9,13 @@ import LoginForm from '@/components/loginForm/LoginForm'
 import Image from 'next/image'
 
 import bgImg from "@/assets/home/loginBg.svg"
+
 import { QueryClient, QueryClientProvider } from 'react-query'
 
 
 const queryClient = new QueryClient();
 
-const page = () => {
+const page : React.FC  = () => {
   return (
     <div className='loginPage'>
       <div className="bg">
