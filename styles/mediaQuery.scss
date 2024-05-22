@@ -67,36 +67,100 @@
 
     .bgImg {
         img {
-            max-width: 100vw;;
+            max-width: 100vw;
+            ;
         }
     }
+
+
+    .ListingCard {
+        width: 15rem;
+        height: 24rem;
+
+        >.img {
+            img {
+                max-width: 15rem;
+            }
+        }
+
+        >.titleRev {
+            >.title {
+                font-size: 1.2rem;
+            }
+
+            >.rev {
+                font-size: .9rem;
+            }
+        }
+
+
+
+        >.addressDetails {
+            >.address {
+                font-size: .9rem;
+            }
+            >.website {
+                font-size: .9rem;
+            }
+        }
+
+
+
+        >.bookBtn {
+            margin-top: 2rem;
+            display: grid;
+
+            * {
+                padding: .5rem;
+                background: #000;
+                color: #fff;
+            }
+        }
+    }
+
+
+    .loginForm {
+        width: 70vw;
+        height: 30rem;
+
+    }
+
+    .loginPage {
+        height: 90vh;
+        >.bg {
+            display: none;
+        }
+    }
+
+
+
+
+
+
 
     .footer {
         >.top {
             flex-direction: column;
-            >.col1{
-                width: 80vw;
-                >h3{
 
-                }
-                >.socials{
-                    
-                    margin-left: -2rem;
+            >.col1 {
+                width: 80vw;
+
+                >.socials {
+                    margin-left: -1rem;
                 }
             }
-            >div{
+
+            >div {
                 margin-top: 2rem;
                 width: 80vw;
-                >h4{
-    
-                }
-                >.menu{
-                    li{
+
+                >.menu {
+                    li {
                         padding: .9rem 0;
                     }
                 }
             }
-           
+
         }
     }
 

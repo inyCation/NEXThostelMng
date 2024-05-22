@@ -35,3 +35,37 @@
     @include displayFlex(space-evenly, start, row, wrap);
 
 }
+
+.loginPage {
+    // height: 100vh;
+    // width: 100vw;
+
+    display: grid;
+    place-items: center;
+    position: relative;
+
+
+    >.bg {
+
+        // margin-top: 0rem;
+        width: 100%;
+        >div {
+            position: unset  !important;
+        }
+        .image {
+            object-fit: contain;
+            width: 100% !important;
+            position: relative !important;
+            height: unset !important;
+        }
+    }
+    >.loginForm{
+        position: absolute;
+        top: 15vh;
+
+    }
+}
+
+.hostelDetailsPage {
+
+}

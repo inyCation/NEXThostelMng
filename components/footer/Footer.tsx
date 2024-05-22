@@ -3,10 +3,14 @@ import React from 'react'
 import { FaLocationPin, FaFacebook, FaYoutube, FaTwitter, } from "react-icons/fa6"
 import { AiFillMail, AiFillPhone } from "react-icons/ai"
 
+import imgBg from "@/assets/home/footerBg.svg"
+
 
 import "./Footer.scss"
+import Image from 'next/image'
 const Footer = () => {
   return (
+
     <div className='footer'>
       <div className="top">
         <div className="col1 ">
@@ -52,11 +56,6 @@ const Footer = () => {
           </ul>
 
         </div>
-
-
-
-
-
       </div>
       <div className="bottom">
         <p className="copyright">
@@ -64,6 +63,7 @@ const Footer = () => {
         </p>
       </div>
     </div>
+
   )
 }
 

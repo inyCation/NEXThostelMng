@@ -7,12 +7,9 @@ import React from 'react'
 
 const page = ({params}:{params:any}) => {
     return (
-        <>
-           
-                hostel id :- {params.hostelId}
+        <div className='hostelDetailsPage'>
 
-           
-        </>
+        </div>
     )
 }
 
