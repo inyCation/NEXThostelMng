@@ -35,7 +35,7 @@ const ListingCard: React.FC  = () => {
       </div>
       
       <div className="bookBtn">
-        <Link href={"/query/75645"} className="QueryNow">Book  Now </Link>
+        <Link href={"/query/75645"} className="QueryNow">Book Now </Link>
       </div>
 
     </div>
