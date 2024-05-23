@@ -1,8 +1,8 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import './LoginForm.scss';
 import { useMutation } from 'react-query';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
+import toast, { Toaster } from 'react-hot-toast';
 interface LoginData {
   email: string;
   password: string;
@@ -67,14 +67,14 @@ const LoginForm: React.FC = () => {
       try {
         await loginMutation.mutateAsync(loginData);
         toast.success('Login successful');
-      } catch (error : any) {
+      } catch (error: any) {
         toast.error(error.message);
       }
     } else {
       try {
         await registerMutation.mutateAsync(registerData);
         toast.success('Registration successful');
-      } catch (error : any) {
+      } catch (error: any) {
         toast.error(error.message);
       }
     }
@@ -99,7 +99,10 @@ const LoginForm: React.FC = () => {
 
   return (
     <>
-      <ToastContainer />
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+      />
       <div className="loginForm">
         <div className="loginOrRegister">
           <div className={`login ${loginRegisterToggler ? 'activeTitle' : ''}`} onClick={() => setLoginRegisterToggler(true)}>Login</div>
