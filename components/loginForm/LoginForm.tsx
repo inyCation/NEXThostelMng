@@ -115,7 +115,7 @@ const LoginForm: React.FC = () => {
             <input type="password" name="password" id="password" placeholder="Password" value={loginData.password} onChange={handleLoginInputChange} />
             <div className="rememberMeForgetPass">
               <span>
-                <input type="checkbox" name="rememberMe" id="rememberMe" checked={loginData.rememberMe} onChange={handleLoginInputChange} /> Remember Me
+                <input type="checkbox" name="rememberMe" id="rememberMe" checked={loginData.rememberMe} onChange={handleLoginInputChange} /> <label htmlFor="rememberMe">Remember Me</label>
               </span>
               <span className="forgetPassword">Forget Password</span>
             </div>
@@ -131,7 +131,7 @@ const LoginForm: React.FC = () => {
 
             <div className="termsAndCondition">
               <span>
-                <input type="checkbox" name="terms" id="terms" checked={registerData.terms} onChange={handleRegisterInputChange} /> I've read and accept terms & conditions
+                <input type="checkbox" name="terms" id="terms" checked={registerData.terms} onChange={handleRegisterInputChange} /> <label htmlFor="terms">I've read and accept terms & conditions</label>
               </span>
             </div>
 

@@ -13,7 +13,7 @@ import bgImg from "@/assets/home/loginBg.svg"
 import { QueryClient, QueryClientProvider } from 'react-query'
 
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({});
 
 const page : React.FC  = () => {
   return (
