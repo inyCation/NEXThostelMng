@@ -65,7 +65,9 @@ const LoginForm: React.FC = () => {
             }
 
             dispatch(loggedInToggle())
-            router.prefetch("/")
+            router.push("/")
+
+            
             toast.success(response.data.message);
 
           }).catch((error) => {
