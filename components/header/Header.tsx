@@ -45,7 +45,7 @@ const Header: React.FC = () => {
 
   const handleClick = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/user/logout');
+      const response = await axios.get('/api/user/logout');
 
       dispatch(loggedInToggle());
       router.push("/login")

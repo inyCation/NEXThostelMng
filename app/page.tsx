@@ -7,21 +7,24 @@ import ListingCard from "@/components/ListingCard/ListingCard";
 import MainSearchBox from "@/components/mainSearchBox/MainSearchBox";
 
 
-
-import axios from 'axios';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 
 import { useEffect } from "react";
 
 import { useRouter } from "next/navigation";
-import Cookies from 'js-cookie';
+
+
+import { useAppSelector } from '@/lib/hooks';
+
 
 
 export default function Home() {
-  const router = useRouter()
+  const router = useRouter();
+
+  
+  const loggedInState = useAppSelector((state) => state.loggedIn.loggedIn);
   useEffect(() => {
-    const cookieValue = Cookies.get('userAuthToken');
-    if (!cookieValue) {
+    if (!loggedInState) {
       router.push("/login")
     }
   }, [])
