@@ -1,11 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import sideSliderReducer from "./features/sideSlider/sideSlider"
-
+import loggedInReducer from "./features/loggedIn/loggedIn"
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
-      sideSlider: sideSliderReducer
+      sideSlider: sideSliderReducer,
+      loggedIn : loggedInReducer
     }
   })
 }

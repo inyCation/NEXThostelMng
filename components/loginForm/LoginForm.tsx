@@ -1,8 +1,12 @@
+"use client";
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import './LoginForm.scss';
 import { useMutation } from 'react-query';
 
 import toast, { Toaster } from 'react-hot-toast';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
+
+
 interface LoginData {
   email: string;
   password: string;
