@@ -14,47 +14,35 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useEffect } from "react";
 
 import { useRouter } from "next/navigation";
-
+import Cookies from 'js-cookie';
 
 
 export default function Home() {
-  // console.log(authToken,'data');
-  
   const router = useRouter()
-
   useEffect(() => {
-
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('api/user/verifyToken');
-        
-        if(!response.data.test) {
-          router.push("/login")
-        }
-        
-
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-    fetchData();
+    const cookieValue = Cookies.get('userAuthToken');
+    if (!cookieValue) {
+      router.push("/login")
+    }
   }, [])
-    
+
+
+
   return (
     <>
-        <Toaster />
-        <div className="bgImg">
-          {/* <Image src={BgImg} alt="BgImg" /> */}
-        </div>
-        <MainSearchBox />
-        <div className="listings">
-          <ListingCard />
-          <ListingCard />
-          <ListingCard />
-          <ListingCard />
-          <ListingCard />
-          <ListingCard />
-        </div>
+      <Toaster />
+      <div className="bgImg">
+        {/* <Image src={BgImg} alt="BgImg" /> */}
+      </div>
+      <MainSearchBox />
+      <div className="listings">
+        <ListingCard />
+        <ListingCard />
+        <ListingCard />
+        <ListingCard />
+        <ListingCard />
+        <ListingCard />
+      </div>
     </>
   );
 }
