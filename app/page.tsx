@@ -26,7 +26,7 @@ export default function Home() {
 
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/user/verifyToken');
+        const response = await axios.get('api/user/verifyToken');
         
         if(!response.data.test) {
           router.push("/login")
