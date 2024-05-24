@@ -6,7 +6,8 @@ import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import axios from 'axios';
 import { loggedInToggle } from '@/lib/store/features/loggedIn/loggedIn';
 
-import Cookies from 'js-cookie';     
+import Cookies from 'js-cookie';  
+import { useRouter } from 'next/navigation';   
 
 interface LoginData {
   email: string;
@@ -40,7 +41,7 @@ const LoginForm: React.FC = () => {
 
 
   const dispatch = useAppDispatch();
- 
+  const router = useRouter();
 
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -64,6 +65,7 @@ const LoginForm: React.FC = () => {
             }
 
             dispatch(loggedInToggle())
+            router.prefetch("/")
             toast.success(response.data.message);
 
           }).catch((error) => {
