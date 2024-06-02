@@ -1,13 +1,13 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import './LoginForm.scss';
 import toast, { Toaster } from 'react-hot-toast';
-import { useAppDispatch, useAppSelector } from '@/lib/hooks';
+import { useAppDispatch } from '@/lib/hooks';
 
 import axios from 'axios';
 import { loggedInToggle } from '@/lib/store/features/loggedIn/loggedIn';
 
-import Cookies from 'js-cookie';  
-import { useRouter } from 'next/navigation';   
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
 
 interface LoginData {
   email: string;
@@ -43,65 +43,115 @@ const LoginForm: React.FC = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
+  const emailValidationPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const validateEmail = (email:string) => {
+    return emailValidationPattern.test(email);
+  }
+
+
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // Prevent default form submission behavior
+    event.preventDefault();
 
     if (loginRegisterToggler) {
       if (loginData.email.trim() === "" || loginData.password === "") {
         toast.error("Fill Up All Details");
         return;
       }
-
-
-
+      if(!validateEmail(loginData.email)){
+        toast.error("Email Is Not Valid");
+        return;
+      }
       try {
-        await axios.post('/api/user/login', { ...loginData })
-          .then((response) => {
-
-
-            if(rememberMe) {
-              Cookies.set("userRememberToken","remember")
-            }
-
-            dispatch(loggedInToggle())
-            router.push("/")
-
-            
-            toast.success(response.data.message);
-
+        const login = async () => {
+          return await axios.post('/api/user/login', { ...loginData })
+        }
+        toast.promise(
+          login().then((response) => {
+            return response;
           }).catch((error) => {
-            toast.error(error.response.data.error);
-          });;
+            throw error;
+          }),
+          {
+            loading: 'Logging in...',
+            success: (response) => {
 
-
-
+              if (rememberMe) {
+                Cookies.set("userRememberToken", "remember")
+                
+              }
+              
+              Cookies.set("userLoggedInState", "loggedInAsUser")
+              dispatch(loggedInToggle())
+              setLoginData({
+                email: "",
+                password: ""
+              })
+              router.push("/")
+              return <div>{response.data.message}</div>
+            },
+            error: (error) => <div>{error.response.data.error}</div>,
+          }
+        );
       } catch (error: any) {
         toast.error(error.message);
       }
     } else {
-      // Validate if password matches confirm password
+      if (registerData.email.trim() === '' || registerData.password.trim() === '' || registerData.username.trim() === '' || confirmPassword === '') {
+        toast.error(`Fill All Details`);
+        return;
+      }
+      if(!validateEmail(registerData.email)){
+        toast.error("Email Is Not Valid");
+        return;
+      }
+      if(registerData.username.trim().length <= 7){
+        toast.error("Username Must Be Of 8 Characters");
+        return;
+      }
+      
+      const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
+
+      if(!passwordPattern.test(registerData.password)){
+        toast.error("Password must be 8 to 16 characters and include at least one uppercase letter, one lowercase letter, one symbol, and one digit");
+        return;
+      }
+
       if (registerData.password !== confirmPassword) {
         toast.error(`Confirm Password Does't match`);
         return;
       }
-
-      // Check if terms and conditions checkbox is checked
       if (!termsAccepted) {
         toast.error('Please accept the terms and conditions');
         return;
       }
 
-      // Proceed with registration
       try {
-        await axios.post('/api/user/signup', { ...registerData })
-          .then((response: any) => {
-            toast.success(response.data.message);
-          }).catch((error) => {
-            toast.error(error.response.data.error);
-          });;
+        const signup = async () => {
+          return await axios.post('/api/user/signup', { ...registerData })
+        }
 
-        // toast.success('Registration successful');
+
+        toast.promise(
+          signup().then((res) => {
+            return res;
+          }).catch((err) => {
+            throw err;
+          }),
+          {
+            loading: 'Singin up ...',
+            success: (res) => {
+              setLoginRegisterToggler(true);
+              setRegisterData({
+                username: '',
+                email: '',
+                password: '',
+              })
+              return <b>{res.data.message}</b>
+            },
+            error: (err) => <b>{err.response!.data.error}</b>,
+          }
+        );
       } catch (error: any) {
         toast.error(error.message);
       }
@@ -173,9 +223,9 @@ const LoginForm: React.FC = () => {
               onChange={handleLoginInputChange}
             />
             <div className="rememberMeForgetPass">
-              <span>
+              {/* <span>
                 <input type="checkbox" name="rememberMe" id="rememberMe" checked={rememberMe} onChange={handleRememberMeChange} /> <label htmlFor="rememberMe">Remember Me</label>
-              </span>
+              </span> */}
               <span className="forgetPassword">Forget Password</span>
             </div>
             <button type="submit" className="submit">
@@ -225,7 +275,7 @@ const LoginForm: React.FC = () => {
                   id="terms"
                   checked={termsAccepted}
                   onChange={handleTermsCheckboxChange}
-                />{' '}
+                />
                 <label htmlFor="terms">I've read and accept terms & conditions</label>
               </span>
             </div>
@@ -241,3 +291,5 @@ const LoginForm: React.FC = () => {
 };
 
 export default LoginForm;
+
+

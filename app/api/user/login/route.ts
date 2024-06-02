@@ -50,6 +50,6 @@ export async function POST(request: NextRequest) {
         }
     }
     else{
-        return NextResponse.json({ error: "Not Authenticated, IP Logged" }, { status: 500 })
+        return NextResponse.json({ error: "Not Allowed" }, { status: 500 })
     }
 }

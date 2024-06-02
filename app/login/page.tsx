@@ -10,22 +10,13 @@ import Image from 'next/image'
 
 import bgImg from "@/assets/home/loginBg.svg"
 
-import { QueryClient, QueryClientProvider } from 'react-query'
-
-
-
-
-const queryClient = new QueryClient({});
-
-const page : React.FC  = () => {
+const page: React.FC = () => {
   return (
     <div className='loginPage'>
       <div className="bg">
-        <Image src={bgImg} fill={true} alt='bgImg' className={'image'}  />
+        <Image src={bgImg} fill={true} alt='bgImg' className={'image'} />
       </div>
-      <QueryClientProvider client={queryClient}>
-        <LoginForm />
-      </QueryClientProvider>
+      <LoginForm />
     </div>
   )
 }

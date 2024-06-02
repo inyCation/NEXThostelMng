@@ -1,6 +1,9 @@
 'use client'
 import React from 'react';
 import Link from 'next/link';
+import "@/styles/main.scss"
+import "@/styles/mediaQuery.scss"
+
 
 interface Hostel {
   id: number;
@@ -34,7 +37,7 @@ const Page = ({ params }: { params: any }) => {
 
     const fetchHostelDetails = async () => {
       try {
-        const response = await fetch(`/api/route/${id}`);
+        const response = await fetch(`/api/hostel/${id}`);
         const data = await response.json();
         setHostel(data);
       } catch (error) {
