@@ -4,7 +4,7 @@ import { getAnalytics } from "firebase/analytics";
 import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDdVOxsSybsftR6cDxyTOigSv8mdP78VPE",
+  apiKey:"AIzaSyDdVOxsSybsftR6cDxyTOigSv8mdP78VPE",
   authDomain: "hostelo-ef086.firebaseapp.com",
   projectId: "hostelo-ef086",
   storageBucket: "hostelo-ef086.appspot.com",
@@ -14,7 +14,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// const analytics = getAnalytics(app);
 
 const storage = getStorage(app)
 
