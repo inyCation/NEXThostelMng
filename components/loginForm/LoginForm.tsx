@@ -8,6 +8,7 @@ import { loggedInToggle } from '@/lib/store/features/loggedIn/loggedIn';
 
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 interface LoginData {
   email: string;
@@ -223,9 +224,10 @@ const LoginForm: React.FC = () => {
               onChange={handleLoginInputChange}
             />
             <div className="rememberMeForgetPass">
-              {/* <span>
-                <input type="checkbox" name="rememberMe" id="rememberMe" checked={rememberMe} onChange={handleRememberMeChange} /> <label htmlFor="rememberMe">Remember Me</label>
-              </span> */}
+              <span className='text-black '>
+                {/* <input type="checkbox" name="rememberMe" id="rememberMe" checked={rememberMe} onChange={handleRememberMeChange} /> <label htmlFor="rememberMe">Remember Me</label> */}
+                <Link href="/admin/login" className='text-black '> Login As Admin</Link>
+              </span>
               <span className="forgetPassword">Forget Password</span>
             </div>
             <button type="submit" className="submit">

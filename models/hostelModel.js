@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const hostelSchema = new mongoose.Schema({
-    hostelname: {
+    title: {
         type: String,
         required: [true, "Please provide a hostel name"],
         unique: true,
@@ -18,14 +18,18 @@ const hostelSchema = new mongoose.Schema({
         type: Number,
         required: [true, "Please provide capacity"],
     },
+    location:{
+        type:String,
+        required:[true,"Please Provide Location"]
+    },
     amenities:{
         type: [String],
-        default: [], // Assuming most hostels have no amenities by default
+        default: [], 
     },
     imageURLs:{
         type: [String],
         required: [true,"Please provide image URLs"],
-        default: [], // Assuming each hostel must have at least one image
+        default: [], 
     }
 });
 

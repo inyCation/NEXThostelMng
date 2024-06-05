@@ -74,10 +74,6 @@ const Header: React.FC = () => {
             <Link href={"/login"}>Login <FaUser /></Link>
           </li>)
         }
-        <li className='hover-underline-animation'>
-          <Link href="/admin">Admin</Link>
-        </li>
-
       </ul>
       <div className="hamBurger" onClick={toggleClass}>
         <div id="nav-icon3" className={isNotOpen ? '' : 'open'}>

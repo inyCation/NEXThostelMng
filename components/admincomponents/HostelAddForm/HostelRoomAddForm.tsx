@@ -11,6 +11,8 @@ interface FormData {
   price: string;
   description: string;
   capacity: string;
+  location: string;
+  pincode:string;
   amenities: string[];
   imageURLs: string[];
 }
@@ -21,6 +23,8 @@ const HostelAddForm: React.FC = () => {
     price: '',
     description: '',
     capacity: '',
+    location: '',
+    pincode:'',
     amenities: [],
     imageURLs: [],
   });
@@ -96,6 +100,8 @@ const HostelAddForm: React.FC = () => {
                   price: '',
                   description: '',
                   capacity: '',
+                  location: '',
+                  pincode:'',
                   amenities: [],
                   imageURLs: [],
                 });
@@ -135,6 +141,22 @@ const HostelAddForm: React.FC = () => {
           name="price"
           placeholder="Price"
           value={formData.price}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          name="location"
+          placeholder="Location"
+          value={formData.location}
+          onChange={handleChange}
+          required
+        />
+         <input
+          type="text"
+          name="pincode"
+          placeholder="Enter Pincode"
+          value={formData.pincode}
           onChange={handleChange}
           required
         />
