@@ -1,19 +1,74 @@
-import React from 'react'
+"use client"
+import React, { useState, useContext, createContext, FormEvent } from 'react'
 import { FaSearch } from "react-icons/fa"
+
 import "./Mainsearchbox.scss"
 
-const MainSearchBox : React.FC  = () => {
+
+import MainSearchBoxRadio from './MainSearchBoxRadio/MainSearchBoxRadio'
+import axios from 'axios';
+import { toast } from "react-hot-toast"
+
+
+
+const MainSearchBox: React.FC = () => {
+    const [filter, setFilter] = useState("title");
+    const [query, setQuery] = useState("");
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setQuery(event.target.value);
+    };
+
+    console.log(filter);
+
+    const handleClick = () => {
+
+        try {
+            const getData = async () => {
+                return await axios.post('/api/hostel/findbyfilter',
+                    filter === "title" ? {"title":query} : filter === "pincode" ? {"pincode":query} : {"locality":query}
+                )
+            }
+
+            toast.promise(
+                getData().then((res) => {
+                    return res
+                }).catch((err) => {
+                    return err
+                }), {
+                loading: "Searching Hostels....",
+                success: (res) => {
+                    
+                    return <div>{"Success"}</div>
+                },
+                error: (err) => {
+                    return <div>{"Error"}</div>
+                }
+            }
+            )
+        } catch (error: any) {
+            console.log(error);
+
+        }
+
+        // Perform any other action related to search here
+    };
+
+
     return (
+
         <div className='mainSearchBox'>
             <div className='mainSearchTitle'>Roam Around <div className='desc'>You can’t imagine, what is waiting for you around your city</div></div>
 
             <div className="input">
-                <input type="text" placeholder='What are you looking for ?' />
-                <div className="search">
-                    <span>Search <FaSearch /></span>
+                <input type="text" placeholder='What are you looking for ?' value={query} onChange={handleChange} />
+                <MainSearchBoxRadio setFilter={setFilter} />
+                <div className="search" onClick={handleClick}>
+                    <span >Search <FaSearch /></span>
                 </div>
             </div>
         </div>
+
     )
 }
 

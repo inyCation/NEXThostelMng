@@ -106,6 +106,8 @@
 
 
 
+
+
         >.bookBtn {
             margin-top: 2rem;
             display: grid;
@@ -125,7 +127,7 @@
 
     }
 
-    .loginPage {
+    .loginPage,.adminLoginPage {
         height: 90vh;
         >.bg {
             display: none;
@@ -163,6 +165,20 @@
 
         }
     }
+    .mainSearchBox {
+        >.input{
+           
+            >.mydict{
+                right: 25vw;
+                top: 4rem;
+            }
+
+            >.search{
+                right: 35vw;
+                top: 7rem;
+            }
+        }
+    }
 
 }
 
@@ -180,6 +196,17 @@
 
 
 @media (max-width: 530px) {
+
+    .mainSearchBox {
+        >.input{
+           
+            >.mydict{
+                right: 18vw;
+                top: 4rem;
+            }
+        }
+    }
+
     .mainSearchBox {
         >.mainSearchTitle {
             font-size: 3rem;

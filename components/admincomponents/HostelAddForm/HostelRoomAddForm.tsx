@@ -12,7 +12,7 @@ interface FormData {
   description: string;
   capacity: string;
   location: string;
-  pincode:string;
+  pincode: string;
   amenities: string[];
   imageURLs: string[];
 }
@@ -24,7 +24,7 @@ const HostelAddForm: React.FC = () => {
     description: '',
     capacity: '',
     location: '',
-    pincode:'',
+    pincode: '',
     amenities: [],
     imageURLs: [],
   });
@@ -101,7 +101,7 @@ const HostelAddForm: React.FC = () => {
                   description: '',
                   capacity: '',
                   location: '',
-                  pincode:'',
+                  pincode: '',
                   amenities: [],
                   imageURLs: [],
                 });
@@ -152,7 +152,7 @@ const HostelAddForm: React.FC = () => {
           onChange={handleChange}
           required
         />
-         <input
+        <input
           type="text"
           name="pincode"
           placeholder="Enter Pincode"

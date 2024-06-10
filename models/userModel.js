@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please provide a password"],
     },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 })
 
 const User = mongoose.models.users || mongoose.model("users", userSchema);

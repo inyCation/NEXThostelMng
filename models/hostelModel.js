@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { boolean } from "zod";
 
 const hostelSchema = new mongoose.Schema({
     title: {
@@ -22,15 +23,27 @@ const hostelSchema = new mongoose.Schema({
         type:String,
         required:[true,"Please Provide Location"]
     },
+    pincode: {
+        type: String,
+        required: [true,"Please Provide Pincode"]
+    },
     amenities:{
         type: [String],
         default: [], 
+    },
+    featured:{
+        type: Boolean,
+        default:false,
     },
     imageURLs:{
         type: [String],
         required: [true,"Please provide image URLs"],
         default: [], 
-    }
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
 });
 
 const Hostel = mongoose.models.Hostel || mongoose.model("Hostel", hostelSchema);

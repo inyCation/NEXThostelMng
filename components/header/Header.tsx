@@ -8,6 +8,7 @@ import { useAppSelector, useAppDispatch } from '@/lib/hooks';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { loggedInToggle } from '@/lib/store/features/loggedIn/loggedIn';
+import { adminLoggedInToggle } from '@/lib/store/features/adminLoggedIn/adminLogin';
 
 const Header: React.FC = () => {
   const [isNotOpen, setIsNotOpen] = useState(true);
@@ -36,6 +37,7 @@ const Header: React.FC = () => {
 
   const dispatch = useAppDispatch();
   const loggedInState = useAppSelector((state) => state.loggedIn.loggedIn);
+  const adminLoogedInState = useAppSelector((state) => state.adminLoggedIn.adminLoggedIn)
   const router = useRouter();
 
   const handleClick = async () => {
@@ -49,6 +51,17 @@ const Header: React.FC = () => {
       toast.error('Error in Loggin out');
     }
   };
+  const handleAdminLogoutClick = async () =>{
+    try {
+      const response = await axios.get('/api/admin/logout');
+      dispatch(adminLoggedInToggle());
+      router.push("/admin/login")
+      toast.success(response.data.message)
+
+    } catch (error) {
+      toast.error('Error in Loggin out');
+    }
+  }
 
   return (
     <nav className={`nav ${isVisible ? 'visible' : 'hidden'}`}>
@@ -56,24 +69,55 @@ const Header: React.FC = () => {
         <Link href="/">HOSTELO</Link>
       </div>
       <ul className={`menu ${isNotOpen ? 'close' : ''}`}>
-        <li className='hover-underline-animation'>
-          <Link href="/">Home</Link>
-        </li>
-        <li className='hover-underline-animation'>
-          <Link href="/about">About</Link>
-        </li>
-        <li className='hover-underline-animation'>
-          <Link href="/contact">Contact</Link>
-        </li>
         {
-          loggedInState ? (
-            <li className="user">
-              <div onClick={handleClick}>Logout <FaUser /></div>
-            </li>
-          ) : (<li className="user">
-            <Link href={"/login"}>Login <FaUser /></Link>
-          </li>)
+          adminLoogedInState ? (
+            <>
+              <li className='hover-underline-animation'>
+                  <Link href="/admin">Home</Link>
+                </li>
+                <li className='hover-underline-animation'>
+                  <Link href="/admin/addhostelroom">List Hostel</Link>
+                </li>
+                <li className='hover-underline-animation'>
+                  <Link href="/admin/dashboard">Dashboard</Link>
+                </li>
+                {
+                  loggedInState ? (
+                    <li className="user">
+                      <div onClick={handleAdminLogoutClick}> Logout Admin <FaUser /></div>
+                    </li>
+                  ) : (<li className="user">
+                    <Link href={"/admin/login"}> Login Admin <FaUser /></Link>
+                  </li>)
+                }
+            </>
+          ) :
+            (
+              <>
+                <li className='hover-underline-animation'>
+                  <Link href="/">Home</Link>
+                </li>
+                <li className='hover-underline-animation'>
+                  <Link href="/about">About</Link>
+                </li>
+                <li className='hover-underline-animation'>
+                  <Link href="/contact">Contact</Link>
+                </li>
+                {
+                  loggedInState ? (
+                    <li className="user">
+                      <div onClick={handleClick}>Logout <FaUser /></div>
+                    </li>
+                  ) : (<li className="user">
+                    <Link href={"/login"}>Login <FaUser /></Link>
+                  </li>)
+                }
+              </>
+            )
         }
+
+
+
       </ul>
       <div className="hamBurger" onClick={toggleClass}>
         <div id="nav-icon3" className={isNotOpen ? '' : 'open'}>

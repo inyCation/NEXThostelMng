@@ -11,7 +11,7 @@ export async function GET(req:NextRequest) {
                     success: true,
                 }
             )
-            response.cookies.set("token", "",
+            response.cookies.set("userAuthToken", "",
             {
                 httpOnly: true, expires: new Date(0)
             });

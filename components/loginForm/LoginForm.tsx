@@ -89,9 +89,9 @@ const LoginForm: React.FC = () => {
                 password: ""
               })
               router.push("/")
-              return <div>{response.data.message}</div>
+              return <div>{response.data!.message}</div>
             },
-            error: (error) => <div>{error.response.data.error}</div>,
+            error: (error) => <div>{error.response!.data.error}</div>,
           }
         );
       } catch (error: any) {
@@ -148,7 +148,7 @@ const LoginForm: React.FC = () => {
                 email: '',
                 password: '',
               })
-              return <b>{res.data.message}</b>
+              return <b>{res.data!.message}</b>
             },
             error: (err) => <b>{err.response!.data.error}</b>,
           }
@@ -179,9 +179,7 @@ const LoginForm: React.FC = () => {
     setTermsAccepted(event.target.checked);
   };
 
-  const handleRememberMeChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setRememberMe(event.target.checked);
-  };
+
   const handleConfirmPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
     setConfirmPassword(event.target.value);
   };
@@ -226,7 +224,7 @@ const LoginForm: React.FC = () => {
             <div className="rememberMeForgetPass">
               <span className='text-black '>
                 {/* <input type="checkbox" name="rememberMe" id="rememberMe" checked={rememberMe} onChange={handleRememberMeChange} /> <label htmlFor="rememberMe">Remember Me</label> */}
-                <Link href="/admin/login" className='text-black '> Login As Admin</Link>
+                <Link href="/admin/login" className='text-black '> Login As Hostel Owner</Link>
               </span>
               <span className="forgetPassword">Forget Password</span>
             </div>

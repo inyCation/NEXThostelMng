@@ -14,6 +14,10 @@ const adminSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please provide a password"],
     },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 })
 
 const Admin = mongoose.models.admin || mongoose.model("admin", adminSchema);

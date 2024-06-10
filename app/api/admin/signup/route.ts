@@ -19,7 +19,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
             const admin = await Admin.findOne({ email })
 
 
-            if (admin) return NextResponse.json({ error: "Admin Alreay exists", success: false }, { status: 500 })
+            if (admin) return NextResponse.json({ error: "Hostel Owner Alreay exists", success: false }, { status: 500 })
     
             const salt = await bcryptjs.genSalt(10);
             const hashedPassword = await bcryptjs.hash(password, salt)
@@ -32,7 +32,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     
             const savedAdmin = await newAdmin.save()
             return NextResponse.json({
-                message: "Admin Registered Successfully",
+                message: "Hostel Owner Registered Successfully",
                 success: true
             })
     
@@ -40,7 +40,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
             return NextResponse.json({ error: error.message, success: false }, { status: 400 })
         }
     } else {
-        return NextResponse.json({ error: "Not Authenticated, IP Logged", success: false }, { status: 500 })
+        return NextResponse.json({ error: "Not Authenticated,", success: false }, { status: 500 })
     }
 
 
