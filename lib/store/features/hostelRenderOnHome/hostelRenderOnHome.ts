@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface hostelRenderOnHome{
-    hostelRenderOnHome: [];
+    hostelRenderOnHome: any;
 }
 
 const initialState : hostelRenderOnHome = {

@@ -10,9 +10,8 @@ import { hostelRenderOnHome } from '@/lib/store/features/hostelRenderOnHome/host
 const HostelRenderOnHome = () => {
   const hostel = useAppSelector((state) => state.hostelRenderOnHome.hostelRenderOnHome);
 
-  // Perform null/undefined check before accessing properties
-  const hostels = Array.isArray(hostel) ? [] : hostel.data?.hostel || [];
-  // const hostels = hostel?.data?.hostel || [];
+
+  const hostels = Array.isArray(hostel) ? [] : hostel?.data?.hostel || [];
 
   return (
     <div className="listings">
