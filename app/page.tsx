@@ -1,6 +1,8 @@
 "use client"
 import "@/styles/main.scss"
 
+
+
 import "@/styles/mediaQuery.scss"
 
 import ListingCard from "@/components/ListingCard/ListingCard";
@@ -15,11 +17,7 @@ import HostelRenderOnHome from "@/components/hostelrenderonhome/HostelRenderOnHo
 
 export default function Home() {
   const router = useRouter();
-
-
   const loggedInState = useAppSelector((state) => state.loggedIn.loggedIn);
-  const dispatch = useAppDispatch();
-
   useEffect(() => {
     if (!loggedInState) {
       router.push("/login")

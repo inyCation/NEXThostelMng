@@ -1,6 +1,10 @@
 import React from 'react'
 import "./MainSearchBoxRadio.scss"
 
+
+
+import "@/styles/mediaQuery.scss"
+
 interface MainSearchBoxRadioProps {
     setFilter: (filter: string) => void;
 }
