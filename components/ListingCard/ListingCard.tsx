@@ -7,9 +7,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 
+interface ListingCardProps {
+  title: string;
+
+}
 
 
-const ListingCard: React.FC  = ({title}:{title:string}) => {
+
+const ListingCard: React.FC<ListingCardProps>  = ({title}:{title:string}) => {
   return (
     <div className='ListingCard' > 
       <div className="img">
