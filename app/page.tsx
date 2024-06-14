@@ -11,6 +11,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAppSelector, useAppDispatch } from '@/lib/hooks';
+import HostelRenderOnHome from "@/components/hostelrenderonhome/HostelRenderOnHome";
 
 export default function Home() {
   const router = useRouter();
@@ -26,8 +27,6 @@ export default function Home() {
     }
   }, [loggedInState])
 
-
-
   return (
     <>
       <Toaster />
@@ -35,13 +34,8 @@ export default function Home() {
         {/* <Image src={BgImg} alt="BgImg" /> */}
       </div>
       <MainSearchBox />
-      <div className="listings">
-        <ListingCard />
-        <ListingCard />
-        <ListingCard />
-        <ListingCard />
-        <ListingCard />
-        <ListingCard />
+      <div >
+        <HostelRenderOnHome />
       </div>
     </>
   );

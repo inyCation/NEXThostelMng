@@ -40,6 +40,11 @@ const hostelSchema = new mongoose.Schema({
         required: [true,"Please provide image URLs"],
         default: [], 
     },
+    owner: {
+        type: String,
+        required: [true, "Owner Not Found"],
+        default:["Owner Not Found"]
+    },
     createdAt: {
         type: Date,
         default: Date.now

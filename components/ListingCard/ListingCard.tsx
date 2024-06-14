@@ -9,7 +9,7 @@ import Link from 'next/link'
 
 
 
-const ListingCard: React.FC  = () => {
+const ListingCard: React.FC  = ({title}:{title:string}) => {
   return (
     <div className='ListingCard' > 
       <div className="img">
@@ -18,7 +18,7 @@ const ListingCard: React.FC  = () => {
 
       <div className="titleRev">
         <div className="title">
-          Four Season Resort
+          {title}
         </div>
         <div className="rev">
           <span className="stars">

@@ -7,7 +7,7 @@ connect();
 export async function GET(req :NextRequest, res : NextResponse) {
     try {
         const data = await Hostel.find({ featured: true }); 
-        return NextResponse.json(data);
+        return NextResponse.json(data);        
     } catch (error:any) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }

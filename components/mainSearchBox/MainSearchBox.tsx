@@ -8,6 +8,8 @@ import "./Mainsearchbox.scss"
 import MainSearchBoxRadio from './MainSearchBoxRadio/MainSearchBoxRadio'
 import axios from 'axios';
 import { toast } from "react-hot-toast"
+import { useAppDispatch } from '@/lib/hooks'
+import { hostelRenderOnHome } from '@/lib/store/features/hostelRenderOnHome/hostelRenderOnHome'
 
 
 
@@ -20,8 +22,14 @@ const MainSearchBox: React.FC = () => {
     };
 
     console.log(filter);
+    const dispatch = useAppDispatch();
 
     const handleClick = () => {
+
+        if(query===""){
+            toast.error("Enter A Valid Search Value");
+            return;
+        }
 
         try {
             const getData = async () => {
@@ -38,7 +46,7 @@ const MainSearchBox: React.FC = () => {
                 }), {
                 loading: "Searching Hostels....",
                 success: (res) => {
-                    
+                    dispatch(hostelRenderOnHome(res))
                     return <div>{"Success"}</div>
                 },
                 error: (err) => {
