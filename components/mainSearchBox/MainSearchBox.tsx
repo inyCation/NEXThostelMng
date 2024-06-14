@@ -13,6 +13,10 @@ import { hostelRenderOnHome } from '@/lib/store/features/hostelRenderOnHome/host
 
 
 
+import "@/styles/mediaQuery.scss"
+
+
+
 const MainSearchBox: React.FC = () => {
     const [filter, setFilter] = useState("title");
     const [query, setQuery] = useState("");
