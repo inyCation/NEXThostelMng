@@ -1,26 +1,36 @@
-@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300..700&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300..700&display=swap');
 
 $primaryColor: #e0e0e0;
 $textDark: #1c1c1c;
 
 
+@font-face {
+    font-family: 'Signika Negative';
+    src: url("../assets/customfont/SignikaNegative.ttf");
+    font-weight: 400;
+    font-style: normal;
+}
+
+
 $primaryFont: "Signika Negative", sans-serif;
 
-@mixin displayFlex($justify, $align, $dir: row, $wrap: nowrap){
+
+
+@mixin displayFlex($justify, $align, $dir: row, $wrap: nowrap) {
     display: flex;
     justify-content: $justify;
     align-items: $align;
-    
-    flex-direction: $dir;    
+
+    flex-direction: $dir;
     flex-wrap: $wrap;
 }
 
 
-@mixin hoverUnderLineAnimation(){
+@mixin hoverUnderLineAnimation() {
     .hover-underline-animation {
         display: inline-block;
         position: relative;
-;
+        ;
     }
 
     .hover-underline-animation::after {
