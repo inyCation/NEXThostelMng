@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req:NextRequest) {
     if(req.method ==="GET"){
-        
         try {
             const response = NextResponse.json(
                 {
