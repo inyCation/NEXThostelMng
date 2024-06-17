@@ -104,7 +104,7 @@ const Header: React.FC = () => {
                   <Link href="/contact">Contact</Link>
                 </li>
                 {
-                  loggedInState ? (
+                  adminLoogedInState ? (
                     <li className="user">
                       <div onClick={handleClick}>Logout <FaUser /></div>
                     </li>

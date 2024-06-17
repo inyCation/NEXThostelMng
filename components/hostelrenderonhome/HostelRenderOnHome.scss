@@ -1,0 +1,11 @@
+@import "@/styles/Variables.scss";
+
+.listings{
+    .noHostelFound{
+        margin-top: 2rem;
+        padding: 1rem;
+        font-size: 1.2rem;
+        font-family: $primaryFont;
+
+    }
+}
