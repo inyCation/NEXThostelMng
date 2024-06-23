@@ -5,6 +5,7 @@ import './HostelRoomAddForm.scss';
 import { ref, getDownloadURL, uploadBytesResumable, UploadTaskSnapshot } from 'firebase/storage';
 import { storage } from '@/lib/firebasestorage';
 import toast, { Toaster } from 'react-hot-toast';
+import { useAppSelector } from '@/lib/hooks';
 
 interface FormData {
   title: string;
@@ -15,6 +16,7 @@ interface FormData {
   pincode: string;
   amenities: string[];
   imageURLs: string[];
+  owner:string;
 }
 
 const HostelAddForm: React.FC = () => {
@@ -27,9 +29,11 @@ const HostelAddForm: React.FC = () => {
     pincode: '',
     amenities: [],
     imageURLs: [],
+    owner:''
   });
 
   const [images, setImages] = useState<File[]>([]);
+  const ownerEmail = useAppSelector((state) => state.adminLoggedIn.adminEmail)
 
   const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -75,6 +79,7 @@ const HostelAddForm: React.FC = () => {
         const updatedFormData = {
           ...prevFormData,
           imageURLs: downloadURLs,
+          owner: ownerEmail,
         };
 
         // console.log('Form data after setting imageURLs:', updatedFormData);
@@ -83,6 +88,8 @@ const HostelAddForm: React.FC = () => {
           const signup = async () => {
             return await axios.post('/api/hostel/addhostelroom', { ...updatedFormData })
           }
+          console.log(updatedFormData);
+          
 
 
           toast.promise(
@@ -104,6 +111,7 @@ const HostelAddForm: React.FC = () => {
                   pincode: '',
                   amenities: [],
                   imageURLs: [],
+                  owner:''
                 });
                 return <b>{res.data.message}</b>
               },

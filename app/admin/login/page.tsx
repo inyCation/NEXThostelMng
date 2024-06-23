@@ -82,7 +82,7 @@ const Page: React.FC = () => {
             success: (response) => {
               
               Cookies.set("adminLoggedInState", "loggedInAsAdmin")
-              dispatch(adminLoggedInToggle())
+              dispatch(adminLoggedInToggle(loginData.email))
               setLoginData({
                 email: "",
                 password: ""

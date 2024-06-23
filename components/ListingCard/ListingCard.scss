@@ -1,63 +1,118 @@
 @import "@/styles/Variables.scss";
 
-.ListingCard{
-    width: 20rem;
+.ListingCard {
+    width: 19rem;
     height: 27rem;
-    // border: 2px solid red;
 
     margin-top: 4rem;
     padding: 1rem;
     box-shadow: 0 0 17px 0 rgba(0, 0, 0, 0.1);
     font-family: $primaryFont;
+    position: relative;
 
-    &:hover{
-        >.img{
-            img{
+    &:hover {
+        >.img {
+            img {
                 transform: scale(1.05)
             }
         }
     }
-    >.img{
-        img{
-            max-width: 20rem;
-            height: auto;
+
+    >.img {
+        img {
+            max-width: 19rem;
+            object-fit: contain;
             transition: all ease-in-out .5s;
 
         }
     }
-    >.titleRev{
-        @include displayFlex(space-evenly,start,column);
+
+    >.titleRev {
+        @include displayFlex(space-evenly, start, column);
         width: 100%;
-        >.title{
+
+        >.title {
             text-align: start;
             font-size: 1.5rem;
             z-index: 1
         }
-        >.rev{
+
+        >.rev {
             margin-top: .9rem;
-            @include displayFlex(space-between,center,row);
+            @include displayFlex(space-between, center, row);
             width: 97%;
 
         }
     }
-    >.addressDetails{
-        >.address{
-            @include displayFlex(space-between,center);
+
+    >.addressDetails {
+        >.address {
+            @include displayFlex(space-between, center);
             padding: .5rem;
 
         }
-        >.website{
-            @include displayFlex(space-between,center);
+
+        >.website {
+            @include displayFlex(space-between, center);
             padding: .5rem;
         }
     }
-    >.bookBtn{
+
+    >.bookBtn {
         margin-top: 2rem;
         display: grid;
-        *{
+
+        * {
             padding: .5rem;
             background: #000;
             color: #fff;
+        }
+    }
+
+    >.featured-label {
+        position: absolute;
+        top: 0;
+        right: 1rem;
+
+        background-color: #f44336;
+        color: white;
+        font-size: .8rem;
+        padding: 5px 9px;
+        border-radius: 4px;
+        transform: rotate(-9deg);
+        transition: transform 0.3s ease-in-out;
+
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+        &:hover {
+            transform: rotate(0deg) scale(1.1);
+        }
+
+    }
+}
+
+.featured {
+
+    height: 11rem;
+    width: 13rem;
+
+
+    >.bookBtn {
+        margin-top: 0rem;
+    }
+    
+
+    >.img {
+        img {
+            max-width: 22rem;
+        }
+    }
+
+    >.titleRev {
+        >.title {
+            text-align: center;
+            font-size: 1rem;
+            z-index: 1
         }
     }
 }

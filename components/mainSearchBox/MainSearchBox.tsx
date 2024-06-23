@@ -18,7 +18,7 @@ import "@/styles/mediaQuery.scss"
 
 
 const MainSearchBox: React.FC = () => {
-    const [filter, setFilter] = useState("title");
+    const [filter, setFilter] = useState("locality");
     const [query, setQuery] = useState("");
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

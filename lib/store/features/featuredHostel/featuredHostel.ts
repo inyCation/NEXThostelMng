@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface featuredHostel{
-    featuredHostel:[],
+    featuredHostel:any,
 }
 
 const initialState : featuredHostel = {

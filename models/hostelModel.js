@@ -19,31 +19,30 @@ const hostelSchema = new mongoose.Schema({
         type: Number,
         required: [true, "Please provide capacity"],
     },
-    location:{
-        type:String,
-        required:[true,"Please Provide Location"]
+    location: {
+        type: String,
+        required: [true, "Please Provide Location"]
     },
     pincode: {
         type: String,
-        required: [true,"Please Provide Pincode"]
+        required: [true, "Please Provide Pincode"]
     },
-    amenities:{
+    amenities: {
         type: [String],
-        default: [], 
+        default: [],
     },
-    featured:{
+    featured: {
         type: Boolean,
-        default:false,
+        default: false,
     },
-    imageURLs:{
+    imageURLs: {
         type: [String],
-        required: [true,"Please provide image URLs"],
-        default: [], 
+        required: [true, "Please provide image URLs"],
+        default: [],
     },
-    owner: {
-        type: String,
+    owner: { 
+        type: String, 
         required: [true, "Owner Not Found"],
-        default:["Owner Not Found"]
     },
     createdAt: {
         type: Date,

@@ -54,7 +54,7 @@ const Header: React.FC = () => {
   const handleAdminLogoutClick = async () =>{
     try {
       const response = await axios.get('/api/admin/logout');
-      dispatch(adminLoggedInToggle());
+      dispatch(adminLoggedInToggle(""));
       router.push("/admin/login")
       toast.success(response.data.message)
 
@@ -82,12 +82,12 @@ const Header: React.FC = () => {
                   <Link href="/admin/dashboard">Dashboard</Link>
                 </li>
                 {
-                  loggedInState ? (
+                  adminLoogedInState ? (
                     <li className="user">
-                      <div onClick={handleAdminLogoutClick}> Logout Admin <FaUser /></div>
+                      <div onClick={handleAdminLogoutClick}> Logout Owner <FaUser /></div>
                     </li>
                   ) : (<li className="user">
-                    <Link href={"/admin/login"}> Login Admin <FaUser /></Link>
+                    <Link href={"/admin/login"}> Login Owner <FaUser /></Link>
                   </li>)
                 }
             </>
@@ -104,7 +104,8 @@ const Header: React.FC = () => {
                   <Link href="/contact">Contact</Link>
                 </li>
                 {
-                  adminLoogedInState ? (
+                   
+                  loggedInState? (
                     <li className="user">
                       <div onClick={handleClick}>Logout <FaUser /></div>
                     </li>

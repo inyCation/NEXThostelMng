@@ -11,7 +11,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     try {
 
         const reqBody = await req.json()
-        const { title, price, description, capacity, location, amenities, pincode, imageURLs } = reqBody;
+        const { title, price, description, capacity, location, amenities, pincode, imageURLs,owner } = reqBody;
 
         console.log(reqBody);
 
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
             location,
             pincode,
             imageURLs,
-
+            owner
         })
 
         const saveHostel = await newHostel.save()

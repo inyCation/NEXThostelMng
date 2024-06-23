@@ -2,18 +2,21 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export interface adminLoggedInState{
     adminLoggedIn: boolean;
+    adminEmail:string;
 }
 
 const initialState : adminLoggedInState = {
-    adminLoggedIn: false
+    adminLoggedIn: false,
+    adminEmail:'',
 }   
 
 export const adminLoggedInStateSlice = createSlice({
     name:'adminLoggedIn',
     initialState,
     reducers:{
-        adminLoggedInToggle: (state) =>{
+        adminLoggedInToggle: (state,payload) =>{
             state.adminLoggedIn = !state.adminLoggedIn
+            state.adminEmail = payload.payload
         },
 
     }
