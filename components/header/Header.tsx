@@ -43,7 +43,7 @@ const Header: React.FC = () => {
   const handleClick = async () => {
     try {
       const response = await axios.get('/api/user/logout');
-      dispatch(loggedInToggle());
+      dispatch(loggedInToggle(""));
       router.push("/login")
       toast.success(response.data.message)
 

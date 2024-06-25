@@ -83,7 +83,7 @@ const LoginForm: React.FC = () => {
               }
               
               Cookies.set("userLoggedInState", "loggedInAsUser")
-              dispatch(loggedInToggle())
+              dispatch(loggedInToggle(loginData.email))
               setLoginData({
                 email: "",
                 password: ""
