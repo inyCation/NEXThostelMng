@@ -51,7 +51,7 @@ const Header: React.FC = () => {
       toast.error('Error in Loggin out');
     }
   };
-  const handleAdminLogoutClick = async () =>{
+  const handleAdminLogoutClick = async () => {
     try {
       const response = await axios.get('/api/admin/logout');
       dispatch(adminLoggedInToggle(""));
@@ -73,23 +73,23 @@ const Header: React.FC = () => {
           adminLoogedInState ? (
             <>
               <li className='hover-underline-animation'>
-                  <Link href="/admin">Home</Link>
-                </li>
-                <li className='hover-underline-animation'>
-                  <Link href="/admin/addhostelroom">List Hostel</Link>
-                </li>
-                <li className='hover-underline-animation'>
-                  <Link href="/admin/dashboard">Dashboard</Link>
-                </li>
-                {
-                  adminLoogedInState ? (
-                    <li className="user">
-                      <div onClick={handleAdminLogoutClick}> Logout Owner <FaUser /></div>
-                    </li>
-                  ) : (<li className="user">
-                    <Link href={"/admin/login"}> Login Owner <FaUser /></Link>
-                  </li>)
-                }
+                <Link href="/admin">Home</Link>
+              </li>
+              <li className='hover-underline-animation'>
+                <Link href="/admin/addhostelroom">List Hostel</Link>
+              </li>
+              <li className='hover-underline-animation'>
+                <Link href="/admin/dashboard">Dashboard</Link>
+              </li>
+              {
+                adminLoogedInState ? (
+                  <li className="user">
+                    <div onClick={handleAdminLogoutClick}> Logout Owner <FaUser /></div>
+                  </li>
+                ) : (<li className="user">
+                  <Link href={"/admin/login"}> Login Owner <FaUser /></Link>
+                </li>)
+              }
             </>
           ) :
             (
@@ -104,11 +104,17 @@ const Header: React.FC = () => {
                   <Link href="/contact">Contact</Link>
                 </li>
                 {
-                   
-                  loggedInState? (
-                    <li className="user">
-                      <div onClick={handleClick}>Logout <FaUser /></div>
-                    </li>
+
+                  loggedInState ? (
+                    <>
+                      <li className='hover-underline-animation'>
+                        <Link href="/user/profile">Profile</Link>
+                      </li>
+                      <li className="user">
+                        <div onClick={handleClick}>Logout <FaUser /></div>
+                      </li>
+                    </>
+
                   ) : (<li className="user">
                     <Link href={"/login"}>Login <FaUser /></Link>
                   </li>)

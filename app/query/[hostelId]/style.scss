@@ -1,0 +1,81 @@
+@import "@/styles/Variables.scss";
+
+
+.hostelDetailsPage {
+    @include displayFlex(space-around, center, row);
+    margin-top: 1rem;
+
+    >.left {
+        width: 60vw;
+        // @include displayFlex(center, center, column);
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        flex-direction: column;
+        margin-left: 2rem;
+
+        >.aboutHostel {
+            margin-top: 1rem;
+            width: 90%;
+
+            >.hostel__title {
+                font-size: 4rem;
+            }
+            >.hostel__location,
+            .hostel__price,
+            .hostel__capacity,
+            .hostel__pincode{
+                font-size: .9rem;
+                padding: .5rem .8rem .5rem;
+            }
+
+
+
+
+        }
+
+        >.amenities {
+            margin-top: 2rem;
+            >ul {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+
+        }
+    }
+
+    >.right {
+        width: 40vw;
+
+        >.bookingForm{
+            @include displayFlex(center, center, column, wrap);
+
+            background-color: #f5f5f5;
+            width: 75%;
+            height: 40vh;
+
+            >form{
+                margin-top: 1rem;
+                @include displayFlex(space-evenly, center, column, wrap);
+                >label{
+                    padding: .5rem .8rem;
+                    input{
+                        padding: .4rem 0rem;
+                    }
+                }
+
+                >.btn{
+                    color: #fff;
+                    background-color: #000;
+                    
+                    padding: .5rem .8rem;
+                    border-radius: .3rem;   
+                }
+
+            }
+        }
+    }
+
+}

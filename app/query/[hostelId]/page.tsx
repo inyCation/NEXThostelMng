@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react';
+import { FaMapMarkerAlt, FaDollarSign, FaUsers, FaMapPin, FaInfoCircle } from 'react-icons/fa';
 import Link from 'next/link';
 import axios from 'axios';
 import Slider from 'react-slick';
@@ -7,10 +8,12 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import toast, { Toaster } from 'react-hot-toast';
 import "@/styles/main.scss";
-import "@/styles/mediaQuery.scss";
+
 import "./style.scss";
 import { useAppSelector } from '@/lib/hooks';
+import Amenities from '@/components/amenities/Amenities';
 
+import "@/styles/mediaQuery.scss";
 
 interface Hostel {
   id: number;
@@ -28,9 +31,8 @@ interface Hostel {
 
 const Page = ({ params }: { params: any }) => {
   const [hostel, setHostel] = useState<Hostel | null>(null);
+
   const [bookingDetails, setBookingDetails] = useState({
-    name: '',
-    email: '',
     checkInDate: '',
     checkOutDate: '',
     numberOfPersons: '1'
@@ -41,7 +43,7 @@ const Page = ({ params }: { params: any }) => {
 
   const [fetchError, setFetchError] = useState<boolean>(false);
 
-  const userEmail = useAppSelector((state) => state.loggedIn.userEmail); 
+  const userEmail = useAppSelector((state) => state.loggedIn.userEmail);
   const hostelId = params.hostelId;
 
   useEffect(() => {
@@ -147,7 +149,16 @@ const Page = ({ params }: { params: any }) => {
     try {
 
       const book = async () => {
-        return await axios.post('/api/hostel/hostelbooking', { userEmail,checkInDate, checkOutDate,totalPrice,GST, hostelId, noOfPerson })
+        return await axios.post('/api/hostel/hostelbooking', {
+
+          userEmail,
+          checkInDate,
+          checkOutDate,
+          totalPrice: totalPriceLoc.toFixed(2),
+          GST: gstAmountLoc.toFixed(2),
+          hostelId,
+          noOfPerson
+        })
       }
 
 
@@ -160,6 +171,16 @@ const Page = ({ params }: { params: any }) => {
         {
           loading: 'Booking Hostel... Hold On',
           success: (res) => {
+            console.log(`
+              Booking Details:
+              User Email: ${userEmail}
+              Check-in Date: ${checkInDate}
+              Check-out Date: ${checkOutDate}
+              Total Price: ${totalPriceLoc}
+              GST: ${gstAmountLoc}
+              Hostel ID: ${hostelId}
+              Number of Persons: ${noOfPerson}
+            `);
 
             return <b>{res.data!.message}</b>
           },
@@ -173,10 +194,9 @@ const Page = ({ params }: { params: any }) => {
 
 
 
-    
+
     setBookingDetails({
-      name: '',
-      email: '',
+
       checkInDate: '',
       checkOutDate: '',
       numberOfPersons: '1',
@@ -210,76 +230,82 @@ const Page = ({ params }: { params: any }) => {
   };
 
   return (
-    <div className='hostelDetailsPage'>
+    <>
       <Toaster
         position="top-center"
         reverseOrder={false}
       />
-      <div className='left'>
-        <Slider {...sliderSettings}>
-          {hostel.imageURLs.map((imageUrl, index) => (
-            <div key={index}>
-              <img src={imageUrl} alt={`Image ${index}`} style={{ width: '80vw', maxHeight: '400px', objectFit: 'contain' }} />
+      <Slider {...sliderSettings}>
+        {hostel.imageURLs.map((imageUrl, index) => (
+          <div key={index}>
+            <img src={imageUrl} alt={`Image ${index}`} style={{ width: '90vw', maxHeight: '400px', objectFit: 'contain' }} />
+          </div>
+        ))}
+      </Slider>
+      <div className='hostelDetailsPage'>
+        <div className='left'>
+          <div className="aboutHostel">
+            <div className="hostel__title">
+              {hostel.title}
             </div>
-          ))}
-        </Slider>
+            <div className="hostel__description">{hostel.description}</div>
+            <div className="hostel__location">
+              <FaMapMarkerAlt className="hostel__icon" />
+              Location: {hostel.location}
+            </div>
+            <div className="hostel__price">
+              <FaDollarSign className="hostel__icon" />
+              Price: {hostel.price}
+            </div>
+            <div className="hostel__capacity">
+              <FaUsers className="hostel__icon" />
+              Capacity: {hostel.capacity}
+            </div>
+            <div className="hostel__pincode">
+              <FaMapPin className="hostel__icon" />
+              Pincode: {hostel.pincode}
+            </div>
+          </div>
 
-        <div className="aboutHostel">
-          <h1>{hostel.title}</h1>
-          <p>{hostel.description}</p>
-          <p>Location: {hostel.location}</p>
-          <p>Price: {hostel.price}</p>
-          <p>Capacity: {hostel.capacity}</p>
-          <p>Pincode: {hostel.pincode}</p>
+          <div className='amenities'>
+            <h3>Amenities:</h3>
+            <ul>
+              {hostel.amenities.map((amenity, index) => (
+                <Amenities index={index} amenity={amenity} />
+              ))}
+            </ul>
+          </div>
         </div>
-
-        <div className='amenities'>
-          <h3>Amenities:</h3>
-          <ul>
-            {hostel.amenities.map((amenity, index) => (
-              <li key={index}>{amenity}</li>
-            ))}
-          </ul>
-        </div>
-      </div>
-      <div className="right">
-        <div className="bookingForm">
-          <h2>Book Now</h2>
-          <form onSubmit={handleFormSubmit}>
-            <label>
-              Name:
-              <input type="text" name="name" value={bookingDetails.name} onChange={handleInputChange} />
-            </label>
-            <label>
-              Email:
-              <input type="email" name="email" value={bookingDetails.email} onChange={handleInputChange} />
-            </label>
-            <label>
-              Check-in Date:
-              <input type="date" name="checkInDate" value={bookingDetails.checkInDate} onChange={handleInputChange} />
-            </label>
-            <label>
-              Check-out Date:
-              <input type="date" name="checkOutDate" value={bookingDetails.checkOutDate} onChange={handleInputChange} />
-            </label>
-            <label>
-              Number of Persons:
-              <select name="numberOfPersons" value={bookingDetails.numberOfPersons} onChange={handleInputChange}>
-                {numberOfPersonsOptions.map((option) => (
-                  <option key={option} value={option}>{option} person{option !== 1 ? 's' : ''}</option>
-                ))}
-              </select>
-            </label>
-            <input type="submit" value={"Book Now"} />
-          </form>
-
-          {/* Display total prices */}
-          <p>Total Price: ${totalPrice.toFixed(2)}</p>
-          <p>Total Price (incl. GST): ${totalWithGST.toFixed(2)}</p>
-          <p>GST Amount: ${GST.toFixed(2)}</p>
+        <div className="right">
+          <div className="bookingForm">
+            <h2>Book Now</h2>
+            <form onSubmit={handleFormSubmit}>
+              <label>
+                Check-in Date:
+                <input type="date" name="checkInDate" value={bookingDetails.checkInDate} onChange={handleInputChange} />
+              </label>
+              <label>
+                Check-out Date:
+                <input type="date" name="checkOutDate" value={bookingDetails.checkOutDate} onChange={handleInputChange} />
+              </label>
+              <label>
+                Number of Persons:
+                <select name="numberOfPersons" value={bookingDetails.numberOfPersons} onChange={handleInputChange}>
+                  {numberOfPersonsOptions.map((option) => (
+                    <option key={option} value={option}>{option} person{option !== 1 ? 's' : ''}</option>
+                  ))}
+                </select>
+              </label>
+              <input type="submit" value={"Book Now"} className='btn' />
+              <p>Total Price (incl. GST): ${totalWithGST.toFixed(2)}</p>
+              <p>Total Price: ${totalPrice.toFixed(2)}</p>
+              <p>GST Amount: ${GST.toFixed(2)}</p>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </>
+
   );
 };
 

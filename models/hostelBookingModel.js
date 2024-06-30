@@ -1,6 +1,10 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-const hostelBookingSchema = new mongoose.Schema({
+const HostelBookingSchema = new mongoose.Schema({
+    hostelName: {
+        type: String,
+        required: [true, "Please provide a Hostel Name"],
+    },
     userEmail: {
         type: String,
         required: [true, "Please provide a user email"],
@@ -34,12 +38,16 @@ const hostelBookingSchema = new mongoose.Schema({
         type: String,
         required: [true, "Owner Not Found"],
     },
+    status:{
+        type: Boolean,
+        default: false,
+    },
     createdAt: {
         type: Date,
         default: Date.now
     },
 });
 
-const HostelBooking = mongoose.models.HostelBooking || mongoose.model("HostelBooking", hostelBookingSchema);
+const HostelBooking = mongoose.models.HostelBooking || mongoose.model("HostelBooking", HostelBookingSchema);
 
 export default HostelBooking;

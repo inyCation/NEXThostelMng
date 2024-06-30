@@ -1,0 +1,15 @@
+.amenities__component {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: #f5f5f5; 
+    border: 1px solid #ddd; 
+    border-radius: 12px; 
+    padding: 15px 20px; 
+    margin: 5px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    font-size: .9rem; 
+    color: #333; 
+}

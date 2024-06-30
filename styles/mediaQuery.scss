@@ -5,6 +5,16 @@
         overflow-x: hidden;
     }
 
+    .hostelDetailsPage{
+        flex-direction: column ;
+        >.left{
+            width: 90vw;
+        }
+        >.right{
+            width: 90vw;
+        }
+    }
+
     .nav {
 
         >.menu {
