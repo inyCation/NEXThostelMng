@@ -224,13 +224,6 @@ const Page: React.FC = () => {
               value={loginData.password}
               onChange={handleLoginInputChange}
             />
-            <div className="rememberMeForgetPass">
-              {/* <span className='text-black '>
-                <input type="checkbox" name="rememberMe" id="rememberMe" checked={rememberMe} onChange={handleRememberMeChange} /> <label htmlFor="rememberMe">Remember Me</label>
-                <Link href="/admin/login" className='text-black '> Login As Admin</Link>
-              </span> */}
-              <span className="forgetPassword">Forget Password</span>
-            </div>
             <button type="submit" className="submit">
               Login
             </button>

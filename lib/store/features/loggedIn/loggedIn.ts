@@ -6,8 +6,8 @@ export interface loggedInState{
 }
 
 const initialState : loggedInState = {
-    loggedIn: true,
-    userEmail:'hir@gmail.com',
+    loggedIn: false,
+    userEmail:'',
 }   
 
 export const loggedInStateSlice = createSlice({

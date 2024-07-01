@@ -1,1 +1,75 @@
 @import "@/styles/Variables.scss";
+
+
+.hostel_add_form {
+
+
+    display: grid;
+    place-items: center;
+    position: relative;
+
+    width: 100vw;
+
+    >.bg {
+
+        // margin-top: 0rem;
+        width: 100%;
+
+        >div {
+            position: unset !important;
+        }
+
+        .image {
+            object-fit: contain;
+            width: 100% !important;
+            position: relative !important;
+            height: unset !important;
+        }
+    }
+
+    >form {
+        @include displayFlex(space-evenly, center, column, wrap);
+        position: absolute;
+        top: 5vh;
+        width: 28vw;
+
+        gap: 1rem;
+        padding: 2rem;
+
+
+        &.active {
+            animation: slideUp 0.4s ease-out;
+        }
+
+        >input,textarea {
+            width: 100%;
+            height: 1.5rem;
+            padding: 0.5rem;
+
+
+            background: none;
+            outline: none;
+            border: none;
+
+
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+            &:focus {
+                border: 1px solid #6f7071;
+            }
+
+        }
+        >.submit{
+            color: #fff;
+            background-color: #000;
+            
+            padding: .5rem .8rem;
+            border-radius: .3rem;
+            // animation: slideLeft 0.4s ease-out;
+        }
+    }
+
+
+}

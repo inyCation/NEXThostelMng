@@ -22,17 +22,3 @@ const page: React.FC = () => {
 }
 
 export default page
-
-
-
-
-
-// <div className="w-full relative pt-[100%]">
-// <Image
-//   src="/profile.webp"
-//   alt="profile"
-//   objectFit="cover"
-//   fill
-//   className="w-full h-full top-0 left-0 object-cover rounded-2xl"
-// />
-// </div>
