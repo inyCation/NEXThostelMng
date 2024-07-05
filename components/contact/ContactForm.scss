@@ -1,0 +1,132 @@
+.contactUsPage{
+    height: 90vh;
+    display: grid;
+    place-items: center;
+    margin-bottom: 30vh;
+
+    >.bg {
+
+        // margin-top: 0rem;
+        width: 100%;
+        >div {
+            position: unset  !important;
+        }
+        .image {
+            object-fit: contain;
+            width: 100% !important;
+            position: relative !important;
+            height: unset !important;
+        }
+    }
+    @media (max-width: 768px) {
+        height: 60vh;
+        width: 90vw;
+        >.bg {
+            display: none;
+        }
+    }
+
+}
+.contact-form-container {
+
+    
+    width: 39vw;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f96c;
+    
+    position: absolute;
+    // margin-top: -8rem;
+    
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        width: 40vw;
+
+        
+
+        .form-group {
+            margin-bottom: 15px;
+
+            label {
+                display: block;
+                margin-bottom: 5px;
+                font-weight: bold;
+            }
+
+            input,
+            textarea {
+                width: 93%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 16px;
+            }
+
+            textarea {
+                resize: vertical;
+            }
+        }
+
+        button[type="submit"] {
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 39vw;
+
+            &:hover {
+                background-color: #0056b3;
+            }
+        }
+    
+    }
+
+    .response-message {
+        margin-top: 20px;
+        font-size: 16px;
+        color: green;
+    }
+
+    @media (max-width: 768px) {
+        padding: 15px;
+
+        
+            width: 40vw;
+        
+        .contact-form .form-group input,
+        .contact-form .form-group textarea {
+            padding: 8px;
+            font-size: 14px;
+        }
+
+        .contact-form button[type="submit"] {
+            padding: 8px 12px;
+            font-size: 14px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        padding: 10px;
+        // width: 90vw;
+        .contact-form .form-group input,
+        .contact-form .form-group textarea {
+            padding: 6px;
+            font-size: 12px;
+        }
+
+        .contact-form button[type="submit"] {
+            padding: 6px 10px;
+            font-size: 12px;
+        }
+
+        .response-message {
+            font-size: 14px;
+        }
+    }
+}

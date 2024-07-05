@@ -15,6 +15,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import bgImg from "@/assets/home/loginBg.svg"
 
+import { FaEye, FaEyeSlash } from "react-icons/fa"
+
+
 interface LoginData {
   email: string;
   password: string;
@@ -32,6 +35,10 @@ const Page: React.FC = () => {
 
   const [confirmPassword, setConfirmPassword] = useState<string>('');
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
+  const [showPassword3, setShowPassword3] = useState(false);
+
   const [loginData, setLoginData] = useState<LoginData>({
     email: '',
     password: '',
@@ -43,13 +50,25 @@ const Page: React.FC = () => {
     password: '',
   });
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  const togglePasswordVisibility2 = () => {
+    setShowPassword2(!showPassword2);
+  };
+
+  const togglePasswordVisibility3 = () => {
+    setShowPassword3(!showPassword3);
+  };
+
+
 
 
   const dispatch = useAppDispatch();
   const router = useRouter();
 
   const emailValidationPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  const validateEmail = (email:string) => {
+  const validateEmail = (email: string) => {
     return emailValidationPattern.test(email);
   }
 
@@ -63,7 +82,7 @@ const Page: React.FC = () => {
         toast.error("Fill Up All Details");
         return;
       }
-      if(!validateEmail(loginData.email)){
+      if (!validateEmail(loginData.email)) {
         toast.error("Email Is Not Valid");
         return;
       }
@@ -80,7 +99,7 @@ const Page: React.FC = () => {
           {
             loading: 'Logging in...',
             success: (response) => {
-              
+
               Cookies.set("adminLoggedInState", "loggedInAsAdmin")
               dispatch(adminLoggedInToggle(loginData.email))
               setLoginData({
@@ -101,18 +120,18 @@ const Page: React.FC = () => {
         toast.error(`Fill All Details`);
         return;
       }
-      if(!validateEmail(registerData.email)){
+      if (!validateEmail(registerData.email)) {
         toast.error("Email Is Not Valid");
         return;
       }
-      if(registerData.username.trim().length <= 7){
+      if (registerData.username.trim().length <= 7) {
         toast.error("Username Must Be Of 8 Characters");
         return;
       }
-      
+
       const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
 
-      if(!passwordPattern.test(registerData.password)){
+      if (!passwordPattern.test(registerData.password)) {
         toast.error("Password must be 8 to 16 characters and include at least one uppercase letter, one lowercase letter, one symbol, and one digit");
         return;
       }
@@ -217,13 +236,19 @@ const Page: React.FC = () => {
               onChange={handleLoginInputChange}
             />
             <input
-              type="password"
+              type={showPassword ? 'text' : 'password'}
+
               name="password"
               id="password"
               placeholder="Password"
               value={loginData.password}
               onChange={handleLoginInputChange}
             />
+
+            <label className='eyeIcon' htmlFor="password"
+              onClick={togglePasswordVisibility}>{showPassword ? <FaEyeSlash /> : <FaEye />}</label>
+
+
             <button type="submit" className="submit">
               Login
             </button>
@@ -248,21 +273,29 @@ const Page: React.FC = () => {
               onChange={handleRegisterInputChange}
             />
             <input
-              type="password"
+              type={showPassword2 ? "text" : "password"}
+
               name="password"
               id="password"
               placeholder="Password"
               value={registerData.password}
               onChange={handleRegisterInputChange}
             />
+
+            <label className='eyeIcon2' htmlFor="password"
+              onClick={togglePasswordVisibility2}>{showPassword2 ? <FaEyeSlash /> : <FaEye />}</label>
+
             <input
-              type="password"
+              type={showPassword3 ? "text" : "password"}
               name="confirmPassword"
               id="confirmPassword"
               placeholder="Confirm Password"
               value={confirmPassword}
               onChange={handleConfirmPasswordChange}
             />
+
+            <label className='eyeIcon3' htmlFor="confirmPassword"
+              onClick={togglePasswordVisibility3}>{showPassword3 ? <FaEyeSlash /> : <FaEye />}</label>
 
             <div className="termsAndCondition">
               <span>

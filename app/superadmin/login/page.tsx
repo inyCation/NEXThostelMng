@@ -1,16 +1,24 @@
+"use client"
 import React, { useState, ChangeEvent, FormEvent } from 'react';
-import './LoginForm.scss';
+import '@/styles/main.scss';
+
+import "./style.scss"
+
+import '@/styles/mediaQuery.scss';
 import toast, { Toaster } from 'react-hot-toast';
 import { useAppDispatch } from '@/lib/hooks';
+import bgImg from "@/assets/home/loginBg.svg"
 
 import axios from 'axios';
-import { loggedInToggle } from '@/lib/store/features/loggedIn/loggedIn';
+// import { loggedInToggle } from '@/lib/store/features/loggedIn/loggedIn';
+import { superAdminLoggedInToggle } from '@/lib/store/features/superAdminLoggedIn/superAdminLogin';
 
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 
-import { FaEye, FaEyeSlash } from "react-icons/fa"
+import {FaEye, FaEyeSlash} from "react-icons/fa"
 
 interface LoginData {
   email: string;
@@ -48,6 +56,7 @@ const LoginForm: React.FC = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
   const togglePasswordVisibility2 = () => {
     setShowPassword2(!showPassword2);
   };
@@ -55,7 +64,6 @@ const LoginForm: React.FC = () => {
   const togglePasswordVisibility3 = () => {
     setShowPassword3(!showPassword3);
   };
-
 
 
 
@@ -85,7 +93,7 @@ const LoginForm: React.FC = () => {
       }
       try {
         const login = async () => {
-          return await axios.post('/api/user/login', { ...loginData })
+          return await axios.post('/api/superadmin/login', { ...loginData })
         }
         toast.promise(
           login().then((response) => {
@@ -103,12 +111,12 @@ const LoginForm: React.FC = () => {
               }
 
               Cookies.set("userLoggedInState", "loggedInAsUser")
-              dispatch(loggedInToggle(loginData.email))
+              dispatch(superAdminLoggedInToggle(loginData.email))
               setLoginData({
                 email: "",
                 password: ""
               })
-              router.push("/")
+              router.push("/superadmin/dashboard")
               return <div>{response.data!.message}</div>
             },
             error: (error) => <div>{error.response!.data.error}</div>,
@@ -149,7 +157,7 @@ const LoginForm: React.FC = () => {
 
       try {
         const signup = async () => {
-          return await axios.post('/api/user/signup', { ...registerData })
+          return await axios.post('/api/superadmin/signup', { ...registerData })
         }
 
 
@@ -205,9 +213,11 @@ const LoginForm: React.FC = () => {
   };
 
 
-
   return (
-    <>
+    <div className='superadminpage'>
+      <div className="bg">
+        <Image src={bgImg} fill={true} alt='bgImg' className={'image'} />
+      </div>
       <Toaster position="top-center" reverseOrder={false} />
       <div className="loginForm">
         <div className="loginOrRegister">
@@ -217,12 +227,12 @@ const LoginForm: React.FC = () => {
           >
             Login
           </div>
-          <div
+          {/* <div
             className={`register ${loginRegisterToggler ? '' : 'activeTitle'}`}
             onClick={() => setLoginRegisterToggler(false)}
           >
             Register
-          </div>
+          </div> */}
         </div>
 
         {loginRegisterToggler ? (
@@ -236,15 +246,15 @@ const LoginForm: React.FC = () => {
               onChange={handleLoginInputChange}
             />
             <input
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword?"text":"password"}
               name="password"
               id="password"
               placeholder="Password"
               value={loginData.password}
               onChange={handleLoginInputChange}
             />
-            <label className='eyeIcon' htmlFor="password"
-              onClick={togglePasswordVisibility}>{showPassword ? <FaEyeSlash /> : <FaEye />}</label>
+             <label className='eyeIcon' htmlFor="password" 
+            onClick={togglePasswordVisibility}>{showPassword ? <FaEyeSlash /> : <FaEye />}</label>
             <div className="rememberMeForgetPass">
               <span className='text-black '>
                 <Link href="/admin/login" className='text-black '> Login As Hostel Owner</Link>
@@ -273,28 +283,30 @@ const LoginForm: React.FC = () => {
               value={registerData.email}
               onChange={handleRegisterInputChange}
             />
+
+
             <input
-              type={showPassword2 ? "text" : "password"}
+              type={showPassword2?"text":"password"}
               name="password"
               id="password"
               placeholder="Password"
               value={registerData.password}
               onChange={handleRegisterInputChange}
             />
-            <label className='eyeIcon2' htmlFor="password"
-              onClick={togglePasswordVisibility2}>{showPassword2 ? <FaEyeSlash /> : <FaEye />}</label>
-
+            <label className='eyeIcon2' htmlFor="password" 
+            onClick={togglePasswordVisibility2}>{showPassword2 ? <FaEyeSlash /> : <FaEye />}</label>
+            
+            
             <input
-              type={showPassword3 ? "text" : "password"}
+              type={showPassword3?"text":"password"}
               name="confirmPassword"
               id="confirmPassword"
               placeholder="Confirm Password"
               value={confirmPassword}
               onChange={handleConfirmPasswordChange}
             />
-
-            <label className='eyeIcon3' htmlFor="confirmPassword"
-              onClick={togglePasswordVisibility3}>{showPassword3 ? <FaEyeSlash /> : <FaEye />}</label>
+            <label className='eyeIcon3' htmlFor="confirmPassword" 
+            onClick={togglePasswordVisibility3}>{showPassword3 ? <FaEyeSlash /> : <FaEye />}</label>
 
 
             <div className="termsAndCondition">
@@ -316,7 +328,7 @@ const LoginForm: React.FC = () => {
           </form>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

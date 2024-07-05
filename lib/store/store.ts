@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
-import sideSliderReducer from "./features/sideSlider/sideSlider"
+
+import superAdminLoggedInReducer from './features/superAdminLoggedIn/superAdminLogin'
 import loggedInReducer from "./features/loggedIn/loggedIn"
 import adminLoggedInReducer from "./features/adminLoggedIn/adminLogin"
 import hostelRenderOnHomeReducer from "./features/hostelRenderOnHome/hostelRenderOnHome"
@@ -8,7 +9,7 @@ import featuredHostelReducer from "./features/featuredHostel/featuredHostel"
 export const makeStore = () => {
   return configureStore({
     reducer: {
-      sideSlider: sideSliderReducer,
+      superAdminLoogedIn : superAdminLoggedInReducer,
       loggedIn : loggedInReducer,
       adminLoggedIn : adminLoggedInReducer,
       hostelRenderOnHome : hostelRenderOnHomeReducer,

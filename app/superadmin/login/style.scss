@@ -25,6 +25,28 @@
     }
 }
 
+.superadminpage{
+    display: grid;
+    place-items: center;
+    position: relative;
+
+    >.bg {
+
+        // margin-top: 0rem;
+        width: 100%;
+        >div {
+            position: unset  !important;
+        }
+        .image {
+            object-fit: contain;
+            width: 100% !important;
+            position: relative !important;
+            height: unset !important;
+        }
+    }
+
+}
+
 .loginForm {
     background: #ebe7e7d1;
 
@@ -39,7 +61,8 @@
     box-shadow: 0 0 17px 0 rgba(0, 0, 0, 0.1);
 
     z-index: 10;
-    position: relative;
+    position: absolute;
+    top: 20%;
 
     >.loginOrRegister {
         @include displayFlex(space-around, center, row, wrap);
@@ -96,23 +119,24 @@
 
         }    
 
-        >.eyeIcon{
+        .eyeIcon{
             position: absolute;
             right: 8%;
             bottom: 53%;
         }
 
-        >.eyeIcon2{
+        .eyeIcon2{
             position: absolute;
             right: 8%;
             bottom: 53%;
         }
 
-        >.eyeIcon3{
+        .eyeIcon3{
             position: absolute;
             right: 8%;
             bottom: 37.5%;
         }
+
 
 
         >.rememberMeForgetPass,

@@ -9,6 +9,7 @@ import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { loggedInToggle } from '@/lib/store/features/loggedIn/loggedIn';
 import { adminLoggedInToggle } from '@/lib/store/features/adminLoggedIn/adminLogin';
+import { superAdminLoggedInToggle } from '@/lib/store/features/superAdminLoggedIn/superAdminLogin';
 
 const Header: React.FC = () => {
   const [isNotOpen, setIsNotOpen] = useState(true);
@@ -38,6 +39,7 @@ const Header: React.FC = () => {
   const dispatch = useAppDispatch();
   const loggedInState = useAppSelector((state) => state.loggedIn.loggedIn);
   const adminLoogedInState = useAppSelector((state) => state.adminLoggedIn.adminLoggedIn)
+  const superAdminLoggedInState = useAppSelector((state) => state.superAdminLoogedIn.superAdminLoggedIn);
   const router = useRouter();
 
   const handleClick = async () => {
@@ -63,6 +65,18 @@ const Header: React.FC = () => {
     }
   }
 
+  const handleSuperAdminLogoutClick = async () => {
+    try {
+      const response = await axios.get('/api/superadmin/logout');
+      dispatch(superAdminLoggedInToggle(""));
+      router.push("/")
+      toast.success(response.data.message)
+
+    } catch (error) {
+      toast.error('Error in Loggin out');
+    }
+  }
+
   return (
     <nav className={`nav ${isVisible ? 'visible' : 'hidden'}`}>
       <div className="logo hover-underline-animation">
@@ -70,57 +84,85 @@ const Header: React.FC = () => {
       </div>
       <ul className={`menu ${isNotOpen ? 'close' : ''}`}>
         {
-          adminLoogedInState ? (
+          superAdminLoggedInState ? (
             <>
               <li className='hover-underline-animation'>
-                <Link href="/admin">Home</Link>
+                <Link href="/superadmin/hostels">Hostels</Link>
               </li>
               <li className='hover-underline-animation'>
-                <Link href="/admin/addhostelroom">List Hostel</Link>
+                <Link href="/superadmin/listusers">List Users</Link>
               </li>
               <li className='hover-underline-animation'>
-                <Link href="/admin/dashboard">Dashboard</Link>
+                <Link href="/superadmin/listhostelowners">List Hostel Owners</Link>
               </li>
-              {
-                adminLoogedInState ? (
-                  <li className="user">
-                    <div onClick={handleAdminLogoutClick}> Logout Owner <FaUser /></div>
-                  </li>
-                ) : (<li className="user">
-                  <Link href={"/admin/login"}> Login Owner <FaUser /></Link>
-                </li>)
-              }
+              <li className='hover-underline-animation'>
+                <Link href="/superadmin/upgrade">Upgrade</Link>
+              </li>
+              <li className='hover-underline-animation'>
+                <Link href="/superadmin/dashboard">Dashboard</Link>
+              </li>
+
+              <li className="user">
+                <div onClick={handleSuperAdminLogoutClick}> Logout Super Admin <FaUser /></div>
+              </li>
+
             </>
-          ) :
-            (
+          ) : (
+            adminLoogedInState ? (
               <>
                 <li className='hover-underline-animation'>
-                  <Link href="/">Home</Link>
+                  <Link href="/admin">Home</Link>
                 </li>
                 <li className='hover-underline-animation'>
-                  <Link href="/about">About</Link>
+                  <Link href="/admin/addhostelroom">List Hostel</Link>
                 </li>
                 <li className='hover-underline-animation'>
-                  <Link href="/contact">Contact</Link>
+                  <Link href="/admin/dashboard">Dashboard</Link>
                 </li>
+                <li className='hover-underline-animation'>
+                    <Link href="/contact">Contact Support</Link>
+                  </li>
                 {
-
-                  loggedInState ? (
-                    <>
-                      <li className='hover-underline-animation'>
-                        <Link href="/user/profile">Profile</Link>
-                      </li>
-                      <li className="user">
-                        <div onClick={handleClick}>Logout <FaUser /></div>
-                      </li>
-                    </>
-
+                  adminLoogedInState ? (
+                    <li className="user">
+                      <div onClick={handleAdminLogoutClick}> Logout Owner <FaUser /></div>
+                    </li>
                   ) : (<li className="user">
-                    <Link href={"/login"}>Login <FaUser /></Link>
+                    <Link href={"/admin/login"}> Login Owner <FaUser /></Link>
                   </li>)
                 }
               </>
-            )
+            ) :
+              (
+                <>
+                  <li className='hover-underline-animation'>
+                    <Link href="/">Home</Link>
+                  </li>
+                  <li className='hover-underline-animation'>
+                    <Link href="/about">About</Link>
+                  </li>
+                  <li className='hover-underline-animation'>
+                    <Link href="/contact">Contact</Link>
+                  </li>
+                  {
+
+                    loggedInState ? (
+                      <>
+                        <li className='hover-underline-animation'>
+                          <Link href="/user/profile">Profile</Link>
+                        </li>
+                        <li className="user">
+                          <div onClick={handleClick}>Logout <FaUser /></div>
+                        </li>
+                      </>
+
+                    ) : (<li className="user">
+                      <Link href={"/login"}>Login <FaUser /></Link>
+                    </li>)
+                  }
+                </>
+              )
+          )
         }
 
 
@@ -139,3 +181,7 @@ const Header: React.FC = () => {
 };
 
 export default Header;
+
+
+
+

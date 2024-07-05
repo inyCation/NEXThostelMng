@@ -132,6 +132,10 @@ const Dashboard = () => {
     }
   };
 
+  const handleRefresh = () =>{
+    fetchHostelBookings();
+  }
+
 
   const formatDate = (dateString: string): string => {
     const date = new Date(dateString);
@@ -196,6 +200,8 @@ const Dashboard = () => {
                 </tbody>
               </table>
               <button className='downloadBtn' onClick={downloadBookingsAsPDF}>Download as PDF</button>
+              <button className='refreshBtn' onClick={handleRefresh}>Refresh</button>
+
             </>
           ) : (
             <p>No bookings found.</p>

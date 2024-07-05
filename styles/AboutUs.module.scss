@@ -1,0 +1,38 @@
+.aboutUsPage {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+
+    @media (max-width: 1024px) {
+        max-width: 90%;
+    }
+
+    @media (max-width: 768px) {
+        padding: 15px;
+    }
+}
+
+.aboutUsPage h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.aboutUsPage .content {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.aboutUsPage .content p {
+    margin-bottom: 15px;
+}
+
+@media (max-width: 480px) {
+    .aboutUsPage h1 {
+        font-size: 1.8rem;
+    }
+
+    .aboutUsPage .content {
+        font-size: 1rem;
+    }
+}
