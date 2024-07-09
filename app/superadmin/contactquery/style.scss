@@ -1,0 +1,50 @@
+.contactQueryPage{
+    display: grid;
+    place-items: center;
+    padding: 2rem 0rem;
+  
+}
+
+#contactTable {
+    margin-top: 1rem;
+    >tbody {
+        >tr:nth-child(2n) {
+            background: #c2c2c2b2;
+        }
+
+        >tr {
+            td {
+                padding: .3rem;
+            }
+
+            >td:nth-child(3) {
+                text-align: center;
+            }
+
+            >.btnGroup {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            button {
+                // color: #fff;
+                // background-color: #000;
+                width: 6rem;
+                padding: .5rem .8rem;
+                border-radius: .3rem;
+
+                display: grid;
+                place-items: center;
+            }
+
+            >.approveButton {
+                background-color: #000;
+            }
+
+            >button:nth-child(2) {
+                background-color: #f44336;
+            }
+
+        }
+    }
+}

@@ -49,6 +49,11 @@ const ContactForm: React.FC = () => {
 
             const response = await axios.post('/api/user/contact', formData);
             setResponseMessage(response.data.message);
+            setFormData({
+                name: '',
+                email: '',
+                message: ''
+            })
         } catch (error: any) {
             setResponseMessage('An error occurred. Please try again.');
         }

@@ -131,7 +131,7 @@ const LoginForm: React.FC = () => {
         return;
       }
 
-      const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
+      const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[. !@#$%^&*(){}<>?\/\\|~`])[A-Za-z\d. !@#$%^&*(){}<>?\/\\|~`]{8,16}$/;
 
       if (!passwordPattern.test(registerData.password)) {
         toast.error("Password must be 8 to 16 characters and include at least one uppercase letter, one lowercase letter, one symbol, and one digit");

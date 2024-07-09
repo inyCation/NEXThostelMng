@@ -5,6 +5,7 @@ import loggedInReducer from "./features/loggedIn/loggedIn"
 import adminLoggedInReducer from "./features/adminLoggedIn/adminLogin"
 import hostelRenderOnHomeReducer from "./features/hostelRenderOnHome/hostelRenderOnHome"
 import featuredHostelReducer from "./features/featuredHostel/featuredHostel"
+import hostelRenderForSuperAdminPanelReducer  from './features/hostelRenderForSuperAdminPanel/hostelRenderForSuperAdminPanel'
 
 export const makeStore = () => {
   return configureStore({
@@ -14,6 +15,7 @@ export const makeStore = () => {
       adminLoggedIn : adminLoggedInReducer,
       hostelRenderOnHome : hostelRenderOnHomeReducer,
       featuredHostel : featuredHostelReducer,
+      hostelRenderForSuperAdminPanel : hostelRenderForSuperAdminPanelReducer,
     }
   })
 }

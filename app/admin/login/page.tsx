@@ -69,7 +69,8 @@ const Page: React.FC = () => {
 
   const emailValidationPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const validateEmail = (email: string) => {
-    return emailValidationPattern.test(email);
+
+    return emailValidationPattern.test(email.trim());
   }
 
 
@@ -88,7 +89,7 @@ const Page: React.FC = () => {
       }
       try {
         const login = async () => {
-          return await axios.post('/api/admin/login', { ...loginData })
+          return await axios.post('/api/admin/login', { email: loginData.email.trim(), password: loginData.password})
         }
         toast.promise(
           login().then((response) => {
@@ -129,7 +130,7 @@ const Page: React.FC = () => {
         return;
       }
 
-      const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
+      const passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[. !@#$%^&*(){}<>?\/\\|~`])[A-Za-z\d. !@#$%^&*(){}<>?\/\\|~`]{8,16}$/;
 
       if (!passwordPattern.test(registerData.password)) {
         toast.error("Password must be 8 to 16 characters and include at least one uppercase letter, one lowercase letter, one symbol, and one digit");
@@ -165,7 +166,9 @@ const Page: React.FC = () => {
                 username: '',
                 email: '',
                 password: '',
+                
               })
+              setConfirmPassword('');
               return <b>{res.data.message}</b>
             },
             error: (err) => <b>{err.response!.data.error}</b>,

@@ -39,6 +39,20 @@ const Dashboard = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
+    if (!email) {
+      window.location.replace('/login'); // Redirect using window.location.replace
+    }
+  }, [email]);
+
+  if (!email) {
+    // Optional: Show a loading state or message while redirecting
+    return <div>Redirecting...</div>;
+  }
+
+
+
+
+  useEffect(() => {
     if (email) {
       fetchHostelBookings();
     }

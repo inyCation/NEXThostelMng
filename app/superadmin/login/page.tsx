@@ -10,7 +10,7 @@ import { useAppDispatch } from '@/lib/hooks';
 import bgImg from "@/assets/home/loginBg.svg"
 
 import axios from 'axios';
-// import { loggedInToggle } from '@/lib/store/features/loggedIn/loggedIn';
+
 import { superAdminLoggedInToggle } from '@/lib/store/features/superAdminLoggedIn/superAdminLogin';
 
 import Cookies from 'js-cookie';
@@ -222,7 +222,7 @@ const LoginForm: React.FC = () => {
       <div className="loginForm">
         <div className="loginOrRegister">
           <div
-            className={`login ${loginRegisterToggler ? 'activeTitle' : ''}`}
+            className={`login ${loginRegisterToggler ? '' : ''}`}
             onClick={() => setLoginRegisterToggler(true)}
           >
             Login

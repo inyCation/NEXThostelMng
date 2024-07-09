@@ -3,7 +3,6 @@ import ListingCard from '../ListingCard/ListingCard';
 import { useAppSelector } from '@/lib/hooks';
 
 import "./HostelRenderOnHome.scss"
-import { hostelRenderOnHome } from '@/lib/store/features/hostelRenderOnHome/hostelRenderOnHome';
 
 const HostelRenderOnHome = () => {
   const hostel = useAppSelector((state) => state.hostelRenderOnHome.hostelRenderOnHome);

@@ -96,14 +96,17 @@ const Header: React.FC = () => {
                 <Link href="/superadmin/listhostelowners">List Hostel Owners</Link>
               </li>
               <li className='hover-underline-animation'>
-                <Link href="/superadmin/upgrade">Upgrade</Link>
+                <Link href="/superadmin/dashboard">Dashboard</Link>
               </li>
               <li className='hover-underline-animation'>
-                <Link href="/superadmin/dashboard">Dashboard</Link>
+                <Link href="/superadmin/premiumrequests">Premium Requests</Link>
+              </li>
+              <li className='hover-underline-animation'>
+                <Link href="/superadmin/contactquery">Contact Queries</Link>
               </li>
 
               <li className="user">
-                <div onClick={handleSuperAdminLogoutClick}> Logout Super Admin <FaUser /></div>
+                <div onClick={handleSuperAdminLogoutClick}> Logout Admin <FaUser /></div>
               </li>
 
             </>
@@ -111,7 +114,7 @@ const Header: React.FC = () => {
             adminLoogedInState ? (
               <>
                 <li className='hover-underline-animation'>
-                  <Link href="/admin">Home</Link>
+                  <Link href="/admin/applypremium">Apply Premium</Link>
                 </li>
                 <li className='hover-underline-animation'>
                   <Link href="/admin/addhostelroom">List Hostel</Link>
@@ -120,8 +123,9 @@ const Header: React.FC = () => {
                   <Link href="/admin/dashboard">Dashboard</Link>
                 </li>
                 <li className='hover-underline-animation'>
-                    <Link href="/contact">Contact Support</Link>
-                  </li>
+                  <Link href="/contact">Contact Support</Link>
+                </li>
+               
                 {
                   adminLoogedInState ? (
                     <li className="user">
