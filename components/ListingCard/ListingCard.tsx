@@ -18,16 +18,17 @@ interface ListingCardProps {
   hostelId: string;
   deleteState?: boolean;
   owner: string;
+  adminDashboard?: boolean;
 }
 
-const ListingCard: React.FC<ListingCardProps> = ({ title, imageUrl, featured = false, hostelId, deleteState = false, owner="" }) => {
+const ListingCard: React.FC<ListingCardProps> = ({ title, imageUrl, featured = false, hostelId, deleteState = false, owner = "", adminDashboard = false }) => {
 
   const image = imageUrl[0];
   const handleDelete = async () => {
     const confirmDelete = confirm("Are you sure you want to delete this hostel?");
     if (confirmDelete) {
       try {
-        const response = await axios.post('/api/superadmin/deletehostel', { email:owner,hostelId });
+        const response = await axios.post('/api/superadmin/deletehostel', { email: owner, hostelId });
         if (response.status === 200) {
           toast.success('Hostel deleted successfully');
         } else {
@@ -36,6 +37,16 @@ const ListingCard: React.FC<ListingCardProps> = ({ title, imageUrl, featured = f
       } catch (error) {
         toast.error('Error deleting hostel');
       }
+    }
+  };
+  const upgradeHostel = async (hostelId: string) => {
+    const email = owner;
+    try {
+      const response = await axios.post('/api/admin/upgradehostel', { email, hostelId });
+      toast.success(response.data.success);
+     
+    } catch (error:any) {
+      toast.error(`${error.response.data.error}`);
     }
   };
 
@@ -57,7 +68,30 @@ const ListingCard: React.FC<ListingCardProps> = ({ title, imageUrl, featured = f
         </div>
 
         <div className="bookBtn">
-          <div style={{"cursor":"pointer"}} onClick={handleDelete} className="QueryNow">Delete Hostel</div>
+          <div style={{ "cursor": "pointer" }} onClick={handleDelete} className="QueryNow">Delete Hostel</div>
+        </div>
+      </div>
+    )
+  }
+  if (adminDashboard) {
+    return (
+      <div className='ListingCard' >
+        <div className="img">
+          <Image src={image} alt='img' width={300} height={200}></Image>
+        </div>
+
+        <div className="titleRev">
+          <div className="title">
+            {title}
+          </div>
+        </div>
+        <div className="addressDetails">
+          <div className="address"> <CiLocationOn /> Khale Street , USA</div>
+          <div className="website"> <CiPhone /> WWW.FourSeason.com</div>
+        </div>
+
+        <div className="bookBtn">
+          <div style={{ "cursor": "pointer" }} onClick={() => upgradeHostel(hostelId)}> Upgrade Featured</div>
         </div>
       </div>
     )

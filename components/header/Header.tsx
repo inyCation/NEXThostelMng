@@ -123,6 +123,9 @@ const Header: React.FC = () => {
                   <Link href="/admin/dashboard">Dashboard</Link>
                 </li>
                 <li className='hover-underline-animation'>
+                  <Link href="/admin/upgradehostel">Upgrade Hostel</Link>
+                </li>
+                <li className='hover-underline-animation'>
                   <Link href="/contact">Contact Support</Link>
                 </li>
                
