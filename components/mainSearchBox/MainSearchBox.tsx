@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useContext, createContext, FormEvent } from 'react'
+import React, { useState } from 'react'
 import { FaSearch } from "react-icons/fa"
 
 import "./Mainsearchbox.scss"
@@ -30,7 +30,7 @@ const MainSearchBox: React.FC = () => {
 
     const handleClick = () => {
 
-        if(query===""){
+        if (query === "") {
             toast.error("Enter A Valid Search Value");
             return;
         }
@@ -38,7 +38,7 @@ const MainSearchBox: React.FC = () => {
         try {
             const getData = async () => {
                 return await axios.post('/api/hostel/findbyfilter',
-                    filter === "title" ? {"title":query} : filter === "pincode" ? {"pincode":query} : {"locality":query}
+                    filter === "title" ? { "title": query } : filter === "pincode" ? { "pincode": query } : { "locality": query }
                 )
             }
 
@@ -51,7 +51,7 @@ const MainSearchBox: React.FC = () => {
                 loading: "Searching Hostels....",
                 success: (res) => {
                     dispatch(hostelRenderOnHome(res))
-                    return <div>{"Success"}</div>
+                    return <div>{""}</div>
                 },
                 error: (err) => {
                     return <div>{"Error"}</div>
@@ -63,7 +63,7 @@ const MainSearchBox: React.FC = () => {
 
         }
 
-        // Perform any other action related to search here
+
     };
 
 

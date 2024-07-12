@@ -36,10 +36,6 @@ const Page = () => {
     return <div>Redirecting...</div>;
   }
 
-
-
-
-
   const fetchUsers = async () => {
     setLoading(true);
     try {

@@ -120,6 +120,9 @@ const Header: React.FC = () => {
                   <Link href="/admin/addhostelroom">List Hostel</Link>
                 </li>
                 <li className='hover-underline-animation'>
+                  <Link href="/admin">Listed Hostels</Link>
+                </li>
+                <li className='hover-underline-animation'>
                   <Link href="/admin/dashboard">Dashboard</Link>
                 </li>
                 <li className='hover-underline-animation'>
@@ -128,7 +131,7 @@ const Header: React.FC = () => {
                 <li className='hover-underline-animation'>
                   <Link href="/contact">Contact Support</Link>
                 </li>
-               
+
                 {
                   adminLoogedInState ? (
                     <li className="user">
@@ -171,9 +174,6 @@ const Header: React.FC = () => {
               )
           )
         }
-
-
-
       </ul>
       <div className="hamBurger" onClick={toggleClass}>
         <div id="nav-icon3" className={isNotOpen ? '' : 'open'}>

@@ -2,14 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAppSelector } from '@/lib/hooks';
-
 import '@/styles/main.scss';
 import './style.scss';
 import '@/styles/mediaQuery.scss';
 import toast, { Toaster } from 'react-hot-toast';
 import ListingCard from '@/components/ListingCard/ListingCard';
-
-
 interface Hostel {
     _id: string;
     title: string;
@@ -18,6 +15,7 @@ interface Hostel {
     hostelId: string;
     deleteState?: boolean;
     owner: string;
+    location:string;
 }
 
 const Page = () => {
@@ -83,10 +81,8 @@ const Page = () => {
                                     hostelId={hostel._id}
                                     owner={hostel.owner}
                                     adminDashboard={true}
-                                    
+                                    address={hostel.location}
                                 />
-
-
                             ))}
                         </div>
                     )}

@@ -66,6 +66,7 @@ const Page = () => {
               hostelId={hostelData._id}
               deleteState={true}
               owner={hostelData.owner}
+              address={hostelData.location}
             />
           ))
         )}

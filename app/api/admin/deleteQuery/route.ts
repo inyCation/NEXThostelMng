@@ -10,14 +10,14 @@ export async function POST(request: NextRequest) {
             const reqBody = await request.json();
             const { bId } = reqBody;
 
-            // Find the hostel booking with matching bId and retrieve hostelId
+            
             const hostelBooking = await HostelBooking.findOne({ _id: bId });
 
             if (!hostelBooking) {
                 return NextResponse.json({ error: "Hostel booking not found" }, { status: 404 });
             }
 
-            // Retrieve hostelId from hostelBooking
+            
          
             const deleteResult = await HostelBooking.deleteOne({ _id: bId });
 

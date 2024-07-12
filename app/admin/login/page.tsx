@@ -3,26 +3,19 @@ import React, { ChangeEvent, FormEvent, useState } from 'react';
 import axios from 'axios';
 import "@/styles/main.scss";
 import "./style.scss"
-
-
 import "@/styles/mediaQuery.scss";
 import toast, { Toaster } from 'react-hot-toast';
 import { useAppDispatch } from '@/lib/hooks';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 import { adminLoggedInToggle } from '@/lib/store/features/adminLoggedIn/adminLogin';
-import Link from 'next/link';
 import Image from 'next/image';
 import bgImg from "@/assets/home/loginBg.svg"
-
 import { FaEye, FaEyeSlash } from "react-icons/fa"
-
-
 interface LoginData {
   email: string;
   password: string;
 }
-
 interface RegisterData {
   username: string;
   email: string;
@@ -60,24 +53,14 @@ const Page: React.FC = () => {
   const togglePasswordVisibility3 = () => {
     setShowPassword3(!showPassword3);
   };
-
-
-
-
   const dispatch = useAppDispatch();
   const router = useRouter();
-
   const emailValidationPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const validateEmail = (email: string) => {
-
     return emailValidationPattern.test(email.trim());
   }
-
-
-
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     if (loginRegisterToggler) {
       if (loginData.email.trim() === "" || loginData.password === "") {
         toast.error("Fill Up All Details");

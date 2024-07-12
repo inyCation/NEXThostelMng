@@ -1,9 +1,6 @@
 "use client";
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
-
-
-
 import './HostelRoomAddForm.scss';
 import { ref, getDownloadURL, uploadBytesResumable, UploadTaskSnapshot } from 'firebase/storage';
 import { storage } from '@/lib/firebasestorage';
@@ -12,8 +9,6 @@ import { useAppSelector } from '@/lib/hooks';
 
 import bgImg from "@/assets/home/loginBg.svg"
 import Image from 'next/image'
-
-
 interface FormData {
   title: string;
   price: string;
@@ -25,7 +20,6 @@ interface FormData {
   imageURLs: string[];
   owner: string;
 }
-
 const HostelAddForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     title: '',
@@ -38,10 +32,8 @@ const HostelAddForm: React.FC = () => {
     imageURLs: [],
     owner: ''
   });
-
   const [images, setImages] = useState<File[]>([]);
   const ownerEmail = useAppSelector((state) => state.adminLoggedIn.adminEmail)
-
   const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files) {
@@ -49,7 +41,6 @@ const HostelAddForm: React.FC = () => {
       setImages(fileList);
     }
   };
-
   const handleChange = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData({
@@ -57,7 +48,6 @@ const HostelAddForm: React.FC = () => {
       [name]: name === 'amenities' ? value.split(',').map((item) => item.trim()) : value,
     });
   };
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (images.length === 0) {
@@ -65,37 +55,27 @@ const HostelAddForm: React.FC = () => {
       return;
     }
     const capacity = parseInt(formData.capacity, 10);
-
     if (capacity <= 0) {
       toast.error('Person Capacity Cannot Be Negative or Zero.');
       return;
     }
-
-    // Validate title
     if (!formData.title.trim()) {
       toast.error('Title is required.');
       return;
     }
-
-    // Validate price
     if (!formData.price.trim()) {
       toast.error('Price is required.');
       return;
     }
-    
     const price = parseFloat(formData.price);
     if (isNaN(price) || price < 0) {
       toast.error('Price must be a valid number and cannot be negative.');
       return;
-    }
-
-    // Validate description
+    } 
     if (!formData.description.trim()) {
       toast.error('Description is required.');
       return;
     }
-
-    // Validate capacity
     if (!formData.capacity.trim()) {
       toast.error('Capacity is required.');
       return;
@@ -103,14 +83,10 @@ const HostelAddForm: React.FC = () => {
       toast.error('Capacity must be a valid number.');
       return;
     }
-
-    // Validate location
     if (!formData.location.trim()) {
       toast.error('Location is required.');
       return;
     }
-
-    // Validate pincode
     if (!formData.pincode.trim()) {
       toast.error('Pincode is required.');
       return;
@@ -119,44 +95,28 @@ const HostelAddForm: React.FC = () => {
       toast.error('Please enter a valid 6-digit pincode.');
       return;
     }
-
-
-
-
     try {
       const uploadTasks = images.map((image) => {
         const storageRef = ref(storage, `/images/${image.name}`);
         return uploadBytesResumable(storageRef, image);
       });
-
       const uploadSnapshots = await Promise.all(uploadTasks);
-
       const downloadURLs = await Promise.all(
         uploadSnapshots.map(async (uploadSnapshot) => {
           const downloadURL = await getDownloadURL(uploadSnapshot.ref);
           return downloadURL;
         })
       );
-
-      // console.log('Images uploaded successfully:', downloadURLs);
-
       setFormData((prevFormData) => {
         const updatedFormData = {
           ...prevFormData,
           imageURLs: downloadURLs,
           owner: ownerEmail,
         };
-
-        // console.log('Form data after setting imageURLs:', updatedFormData);
-
         try {
           const signup = async () => {
             return await axios.post('/api/hostel/addhostelroom', { ...updatedFormData })
           }
-          console.log(updatedFormData);
-
-
-
           toast.promise(
             signup().then((res) => {
               return res;
@@ -166,7 +126,6 @@ const HostelAddForm: React.FC = () => {
             {
               loading: 'Adding Hostel in Progress',
               success: (res) => {
-
                 setFormData({
                   title: '',
                   price: '',
@@ -186,10 +145,6 @@ const HostelAddForm: React.FC = () => {
         } catch (error: any) {
           toast.error(error.message);
         }
-
-        // Now you can use the updated formData for your submission
-        // console.log('Form submitted with data:', updatedFormData);
-
         return updatedFormData;
       });
     } catch (error) {

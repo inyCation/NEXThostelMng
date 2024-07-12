@@ -1,14 +1,7 @@
-// Import necessary modules and styles
 import React from 'react';
 import styles from '@/styles/AboutUs.module.scss';
-
 import "@/styles/main.scss"
-
-
 import "@/styles/mediaQuery.scss"
-
-
-
 const page: React.FC = () => {
   return (
     <div className={styles.aboutUsPage}>

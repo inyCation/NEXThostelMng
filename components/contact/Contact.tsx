@@ -1,22 +1,16 @@
 "use client";
 import React, { useState } from 'react';
 import axios from 'axios';
-
 import Image from 'next/image';
 import bgImg from "@/assets/home/loginBg.svg"
-
 import './ContactForm.scss';
-
-
 const ContactForm: React.FC = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         message: ''
     });
-
     const [responseMessage, setResponseMessage] = useState<string | null>(null);
-
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setFormData({
@@ -24,29 +18,17 @@ const ContactForm: React.FC = () => {
             [name]: value
         });
     };
-
-
-
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
         const emailValidationPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-
         const validateEmail = (email: string) => {
             return emailValidationPattern.test(email);
         };
-
-
         if (!validateEmail(formData.email)) {
             setResponseMessage('Please enter a valid email address.');
             return;
         }
-
         try {
-
-
-
             const response = await axios.post('/api/user/contact', formData);
             setResponseMessage(response.data.message);
             setFormData({

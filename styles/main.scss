@@ -37,9 +37,7 @@
 }
 
 .loginPage {
-    // height: 100vh;
-    // width: 100vw;
-
+  
     display: grid;
     place-items: center;
     position: relative;
@@ -47,7 +45,7 @@
 
     >.bg {
 
-        // margin-top: 0rem;
+        
         width: 100%;
         >div {
             position: unset  !important;

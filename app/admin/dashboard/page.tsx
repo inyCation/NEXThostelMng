@@ -4,22 +4,11 @@ import axios from 'axios';
 import { useAppSelector } from '@/lib/hooks';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
-
 import '@/styles/main.scss';
-
-
-
-
-
 import "./style.scss"
-
 import '@/styles/mediaQuery.scss';
 import toast, { Toaster } from 'react-hot-toast';
 import mongoose from 'mongoose';
-
-
-
-
 interface HostelBooking {
   _id: string;
   hostelName: string;
@@ -34,30 +23,21 @@ interface HostelBooking {
 
 const Dashboard = () => {
   const email = useAppSelector(state => state.adminLoggedIn.adminEmail);
-
   const [hostelBookings, setHostelBookings] = useState<HostelBooking[]>([]);
   const [error, setError] = useState('');
-
   useEffect(() => {
     if (!email) {
-      window.location.replace('/login'); // Redirect using window.location.replace
+      window.location.replace('/login');
     }
   }, [email]);
-
   if (!email) {
-    // Optional: Show a loading state or message while redirecting
     return <div>Redirecting...</div>;
   }
-
-
-
-
-  useEffect(() => {
+useEffect(() => {
     if (email) {
       fetchHostelBookings();
     }
   }, [email]);
-
   const fetchHostelBookings = async () => {
     try {
       const response = await axios.post('/api/admin/dashboardbooking', { email: email });
@@ -70,10 +50,8 @@ const Dashboard = () => {
       setError('Failed to fetch data');
     }
   };
-
   const downloadBookingsAsPDF = () => {
     const input = document.getElementById('hostelBookingsTable');
-
     if (input) {
       html2canvas(input).then((canvas) => {
         const imgData = canvas.toDataURL('image/png');
@@ -86,50 +64,34 @@ const Dashboard = () => {
       toast.error('Error generating PDF');
     }
   };
-
-
   const deleteQuery = async (id: any) => {
     const bId = new mongoose.Types.ObjectId(id);
-
     const confirmDelete = window.confirm('Are you sure you want to delete this booking?');
     if (!confirmDelete) {
       return;
     }
-
-
     try {
       const response = await axios.post('/api/admin/deleteQuery', { bId: bId });
-
       if (response.status === 200) {
         setHostelBookings(prevBookings =>
           prevBookings.filter(booking => booking._id !== id)
         );
-
         console.log(response.data.message);
-
         toast.success(`${response.data.message}`);
       } else {
         toast.error(response.data.error || "Internal Server Error");
       }
-
     } catch (error: any) {
       console.log(error.error)
     }
   }
-
-
-
-
-  const handleApproval = async (status: boolean, bookingId: any) => {
+const handleApproval = async (status: boolean, bookingId: any) => {
     const bId = new mongoose.Types.ObjectId(bookingId);
-
-
     try {
       const response = await axios.post("/api/admin/approvebooking", {
         status,
         bId,
       });
-
       if (response.status === 200) {
         setHostelBookings(prevBookings =>
           prevBookings.map(booking =>
@@ -158,8 +120,6 @@ const Dashboard = () => {
     }
     return date.toLocaleDateString();
   };
-
-
   return (
     <>
       <Toaster />
@@ -188,7 +148,6 @@ const Dashboard = () => {
                     <th>GST</th>
                     <th>Actions</th>
                     <th>Delete</th>
-
                   </tr>
                 </thead>
                 <tbody>
@@ -215,14 +174,10 @@ const Dashboard = () => {
               </table>
               <button className='downloadBtn' onClick={downloadBookingsAsPDF}>Download as PDF</button>
               <button className='refreshBtn' onClick={handleRefresh}>Refresh</button>
-
             </>
           ) : (
             <p>No bookings found.</p>
           )}
-
-
-
         </div>
       </div >
 

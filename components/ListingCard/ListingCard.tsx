@@ -1,16 +1,11 @@
-import React, { useRef, useEffect } from 'react'
+import React from 'react'
 import "./ListingCard.scss"
-import img from "@/assets/ListingCard/place-4.jpg"
 
-import { CiLocationOn, CiPhone, } from "react-icons/ci"
-
+import { CiLocationOn, CiGlobe, } from "react-icons/ci"
 import Link from 'next/link'
 import Image from 'next/image'
 import axios from 'axios'
 import toast from 'react-hot-toast'
-
-
-
 interface ListingCardProps {
   title: string;
   imageUrl: string[];
@@ -19,9 +14,10 @@ interface ListingCardProps {
   deleteState?: boolean;
   owner: string;
   adminDashboard?: boolean;
+  address?:string;
 }
 
-const ListingCard: React.FC<ListingCardProps> = ({ title, imageUrl, featured = false, hostelId, deleteState = false, owner = "", adminDashboard = false }) => {
+const ListingCard: React.FC<ListingCardProps> = ({ title, imageUrl, featured = false, hostelId, deleteState = false, owner = "", adminDashboard = false, address = "" }) => {
 
   const image = imageUrl[0];
   const handleDelete = async () => {
@@ -63,8 +59,8 @@ const ListingCard: React.FC<ListingCardProps> = ({ title, imageUrl, featured = f
           </div>
         </div>
         <div className="addressDetails">
-          <div className="address"> <CiLocationOn /> Khale Street , USA</div>
-          <div className="website"> <CiPhone /> WWW.FourSeason.com</div>
+          <div className="address"> <CiLocationOn />{address}</div>
+          <div className="website"> <CiGlobe /> www.Hostelo.com</div>
         </div>
 
         <div className="bookBtn">
@@ -86,8 +82,8 @@ const ListingCard: React.FC<ListingCardProps> = ({ title, imageUrl, featured = f
           </div>
         </div>
         <div className="addressDetails">
-          <div className="address"> <CiLocationOn /> Khale Street , USA</div>
-          <div className="website"> <CiPhone /> WWW.FourSeason.com</div>
+          <div className="address"> <CiLocationOn />{address}</div>
+          <div className="website"> <CiGlobe /> www.Hostelo.com</div>
         </div>
 
         <div className="bookBtn">
@@ -140,8 +136,8 @@ const ListingCard: React.FC<ListingCardProps> = ({ title, imageUrl, featured = f
       </div>
 
       <div className="addressDetails">
-        <div className="address"> <CiLocationOn /> Khale Street , USA</div>
-        <div className="website"> <CiPhone /> WWW.FourSeason.com</div>
+        <div className="address"> <CiLocationOn />{address}</div>
+        <div className="website"> <CiGlobe /> www.Hostelo.com</div>
       </div>
 
       <div className="bookBtn">

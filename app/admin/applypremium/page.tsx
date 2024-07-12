@@ -6,26 +6,15 @@ import './style.scss';
 import '@/styles/mediaQuery.scss';
 import toast, { Toaster } from 'react-hot-toast';
 import { useAppSelector } from '@/lib/hooks';
-
-
 const Page = () => {
-
   const [loading, setLoading] = useState(false);
-
   const email = useAppSelector((state) => state.adminLoggedIn.adminEmail);
-
   useEffect(() => {
     if (!email) {
       window.location.replace('/login'); 
     }
   }, [email]);
-
-  if (!email) {
-    
-    return <div>Redirecting...</div>;
-  }
-
-
+  if (!email) {return <div>Redirecting...</div>;}
   const handleApplyForUpgrade = async () => {
     setLoading(true);
     try {
@@ -41,7 +30,6 @@ const Page = () => {
       setLoading(false);
     }
   };
-
   return (
     <div className="advertisement-page">
       <Toaster />
@@ -65,9 +53,6 @@ const Page = () => {
           <strong>4. Priority Support:</strong> Enjoy priority customer support to resolve your queries and issues faster.
         </p>
       </div>
-
-
-
       <div className="testimonial-section">
         <h2>What Our Premium Members Say</h2>
         <div className="testimonial">

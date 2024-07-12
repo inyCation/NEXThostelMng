@@ -14,7 +14,7 @@ const HostelRenderOnHome = () => {
 
       {hostels.length === 0 ?( <div className='noHostelFound'>"No Hostel Found!!"</div>) : 
         hostels.map((hostelData: any, index: number) => (
-          <ListingCard key={index} title={hostelData.title} imageUrl={hostelData.imageURLs}  hostelId={hostelData._id} />
+          <ListingCard key={index} title={hostelData.title} imageUrl={hostelData.imageURLs}  hostelId={hostelData._id} owner={hostelData.owner} address={hostelData.location}/>
         ))
       }
     </div>

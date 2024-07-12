@@ -34,7 +34,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
             })
     
             const savedUser = await newUser.save()
-            //send verification mail
+            
     
             return NextResponse.json({
                 message: "User Registered Successfully",
